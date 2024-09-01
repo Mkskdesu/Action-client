@@ -1,0 +1,71 @@
+$fontText: "ZenKakuGothic", sans-serif;
+$fontHeader: "Zen Kaku Gothic", sans-serif;
+
+@mixin font-header {
+    font-family: $fontHeader;
+}
+
+@mixin font-text {
+    font-family: $fontText;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes blackOut {
+    from {
+        filter: brightness(1);
+    }
+
+    to {
+        filter: brightness(0);
+    }
+}
+
+@keyframes blackIn {
+    from {
+        filter: brightness(0);
+    }
+
+    to {
+        filter: brightness(1);
+    }
+}
+
+//$fadeIn: fadeIn;
+
+//color palette
+$pageBackground: rgb(225, 225, 225);
+$textColor: rgb(20,20,20);
+$grayText: rgb(180, 180, 180);
+
+$shadowColor: rgb(220, 220, 220);
+
+$borderColor: rgb(220, 220, 220);
+
+$accentColor: rgb(64, 225, 239);
+
+$focusColor: rgb(231, 149, 47);
+
+$inputBackground: rgb(26, 27, 29);
+
+$inputBackgroundPrimary: rgb(26,27,29);
+$inputBackgroundSecondary: rgb(29,31,33);
+$inputBackgroundTrinity: rgb(54, 56, 56);

@@ -1,0 +1,8 @@
+@import "global/styles/mixin.scss";
+
+.app{
+    height: 100dvh;
+    background-color: $pageBackground;
+    color: $textColor;
+    @include font-text;
+}

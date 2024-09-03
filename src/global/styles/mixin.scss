@@ -52,8 +52,10 @@ $fontHeader: "Zen Kaku Gothic", sans-serif;
 //$fadeIn: fadeIn;
 
 //color palette
-$pageBackground: rgb(225, 225, 225);
-$textColor: rgb(20,20,20);
+$pageBackground: rgb(17,21,31);
+$pageBackgroundLight: rgb(225, 225, 225);
+$textColor: rgb(225, 225, 225);
+$textColorLight: rgb(20,20,20);
 $grayText: rgb(180, 180, 180);
 
 $shadowColor: rgb(220, 220, 220);
@@ -66,6 +68,6 @@ $focusColor: rgb(231, 149, 47);
 
 $inputBackground: rgb(26, 27, 29);
 
-$inputBackgroundPrimary: rgb(26,27,29);
+$inputBackgroundPrimary: rgb(242,249,252);
 $inputBackgroundSecondary: rgb(29,31,33);
 $inputBackgroundTrinity: rgb(54, 56, 56);

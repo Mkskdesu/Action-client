@@ -1,0 +1,72 @@
+@import "global/styles/mixin.scss";
+
+.footer {
+    height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to bottom, transparent, $pageBackground);
+    position: absolute;
+    bottom: 8px;
+
+    @media screen and (max-width:480px) {
+        bottom: 0;
+    }
+
+    .content {
+        height: 64px;
+        width: 480px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        backdrop-filter: blur(16px);
+        background-color: $footerBackground;
+        border-radius: 8px;
+        border: 2px solid $borderColor;
+        overflow: hidden;
+
+        @media screen and (max-width:480px) {
+            border: none;
+            border-top: 1px solid $borderColor;
+            border-radius: 0;
+        }
+
+
+        button {
+            all: unset;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+
+            svg {
+                transition: 0.2s;
+                height: 24px;
+                width: 24px;
+            }
+
+            span {
+                font-size: 0.8em;
+                color: $grayText;
+            }
+
+            &:hover,
+            &:focus-visible {
+                background-color: $inputBackgroundSecondary;
+
+                svg {
+                    scale: 1.1;
+                }
+            }
+
+            &:active {
+                filter: brightness(0.8);
+
+                svg {
+                    scale: 0.95;
+                }
+            }
+        }
+    }
+}

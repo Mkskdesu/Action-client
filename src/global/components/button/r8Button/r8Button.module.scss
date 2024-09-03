@@ -1,0 +1,22 @@
+@import "global/styles/mixin.scss";
+
+.r8Button {
+    all: unset;
+    color: $textColorSecondary;
+    text-align: center;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 8px 0;
+    background-color: $inputBackgroundPrimary;
+    transition: 0.2s;
+
+    &:focus,
+    &:hover {
+        box-shadow: 0 0 4px 2px $accentColor;
+    }
+
+    &:active {
+        filter: brightness(0.8);
+        scale: 0.98;
+    }
+}

@@ -1,19 +1,25 @@
+@import "global/styles/mixin.scss";
+
 @font-face {
-  font-family: "ZenKakuGothic";
-  src: url("../../assets/fonts/ZENKAKUGOTHICNEW-REGULAR.TTF");
+    font-family: "ZenKakuGothic";
+    src: url("../../assets/fonts/ZENKAKUGOTHICNEW-REGULAR.TTF");
 }
 
 @font-face {
-  font-family: "Kamaboko";
-  src: url("../../assets/fonts/SOUKamaboko-Regular.otf");
+    font-family: "Kamaboko";
+    src: url("../../assets/fonts/SOUKamaboko-Regular.otf");
 }
 
 body {
-  margin: 0;
-  font-family: "ZenKakuGothic";
+    margin: 0;
+    font-family: "ZenKakuGothic";
 }
 
 #root {
-  position: relative;
-  height: 100vh;
+    position: relative;
+    height: 100vh;
+}
+
+a{
+    color: $linkColor;
 }

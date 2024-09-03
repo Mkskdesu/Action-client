@@ -1,0 +1,12 @@
+.iconButton {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 4px;
+    .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

@@ -54,13 +54,15 @@ $fontHeader: "Zen Kaku Gothic", sans-serif;
 //color palette
 $pageBackground: rgb(17,21,31);
 $pageBackgroundLight: rgb(225, 225, 225);
-$textColor: rgb(225, 225, 225);
+$textColor: rgb(228, 245, 247);
+$textColorSecondary: rgb(20,20,20);
 $textColorLight: rgb(20,20,20);
 $grayText: rgb(180, 180, 180);
+$linkColor: rgb(54, 199, 199);
 
 $shadowColor: rgb(220, 220, 220);
 
-$borderColor: rgb(220, 220, 220);
+$borderColor: rgb(7, 79, 92);
 
 $accentColor: rgb(64, 225, 239);
 
@@ -68,6 +70,15 @@ $focusColor: rgb(231, 149, 47);
 
 $inputBackground: rgb(26, 27, 29);
 
-$inputBackgroundPrimary: rgb(242,249,252);
-$inputBackgroundSecondary: rgb(29,31,33);
-$inputBackgroundTrinity: rgb(54, 56, 56);
+$inputBackgroundPrimary: rgb(221, 241, 250);
+$inputBackgroundSecondary: rgb(10, 26, 43);
+$inputBackgroundTrinity: rgb(55, 63, 90);
+
+$headerBackground: rgb(31, 40, 63);
+$headerBackgroundLight: rgb(225,225,225);
+
+$footerBackground: rgba(31, 40, 63,0.75);
+
+$sectionBackgroundPrimary: rgb(15, 23, 43);
+$sectionBackgroundSecondary: rgb(21, 27, 43);
+$sectionBorder: rgb(30, 36, 54);

@@ -1,7 +1,54 @@
+@import "global/styles/mixin.scss";
+
 .heading {
-    font-family: "Kamaboko";
-    font-size: 2em;
-    height: 64px;
     display: grid;
-    grid-template-columns: auto;
+    padding: 0 8px;
+    grid-template-columns: auto 1fr auto 64px 64px;
+    align-items: center;
+    height: 64px;
+    user-select: none;
+    background-image: radial-gradient(ellipse at top, $headerBackground, $pageBackground);
+
+    @media screen and (max-width:480px) {
+        grid-template-columns: 1fr auto 64px 64px;
+
+        .title {
+            display: none;
+        }
+
+    }
+
+    .title {
+        font-family: "Kamaboko";
+        font-size: 2em;
+    }
+
+    .pageTitle {
+        text-align: center;
+        font-size: 1.5em;
+
+        @media screen and (max-width:480px) {
+            text-align: left;
+        }
+    }
+
+    .account{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 4px;
+    }
+
+    .icon {
+        transition: 0.2s;
+
+        &:hover,
+        &:focus-visible {
+            scale: 1.1;
+        }
+
+        &:active {
+            scale: 0.95;
+        }
+    }
 }

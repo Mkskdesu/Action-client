@@ -1,5 +1,47 @@
-.content{
-    .monthlySummary{
-        background-image: linear-gradient();
+@import "global/styles/mixin.scss";
+
+.dashboard {
+    padding: 8px;
+
+    .grassCalendar {
+        height: 240px;
+        background-image: linear-gradient(to bottom, $sectionBackgroundPrimary, $sectionBackgroundSecondary);
+        border: 2px solid $sectionBorder;
+        border-radius: 12px;
+        padding: 8px;
+
+        .title {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            column-gap: 16px;
+
+            h2 {
+                margin: 0;
+            }
+
+            .detailsbutton {
+                all: unset;
+                text-align: center;
+            }
+
+            .button {
+                transition: 0.2s;
+                border-radius: 16px;
+                padding: 4px;
+                min-width: 48px;
+
+                &:hover,&:focus-visible {
+                    background-color: $inputBackgroundTrinity;
+                }
+
+                &:active {
+                    filter: brightness(0.8);
+                    scale: 0.95;
+                }
+            }
+
+
+
+        }
     }
 }

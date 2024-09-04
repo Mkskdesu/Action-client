@@ -17,15 +17,15 @@ export default () => {
                     <HiOutlineHome />
                     <span>ホーム</span>
                 </button>
-                <button onClick={() => navigate("/record")}>
+                <button onClick={() => navigate("record")}>
                     <CgNotes />
                     <span>記録</span>
                 </button>
-                <button onClick={() => navigate("/social")}>
+                <button onClick={() => navigate("social")}>
                     <BsPeople />
                     <span>ソーシャル</span>
                 </button>
-                <button onClick={() => navigate("/timer")}>
+                <button onClick={() => navigate("timer")}>
                     <BsClock />
                     <span>タイマー</span>
                 </button>

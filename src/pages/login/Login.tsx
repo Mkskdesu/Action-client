@@ -44,7 +44,7 @@ export default () => {
                         </div>
                     </div>
                     
-                    <R8Button>
+                    <R8Button class={style.loginButton}>
                         ログイン
                     </R8Button>
                 </div>

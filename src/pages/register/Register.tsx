@@ -49,7 +49,7 @@ export default () => {
                         <label for={`login-${passwordCheckUuid}`}>パスワード(確認)</label>
                             <input type={"password"} id={`login-${passwordCheckUuid}`} />
                     </div>
-                    <R8Button>
+                    <R8Button class={style.loginButton}>
                         登録
                     </R8Button>
                 </div>

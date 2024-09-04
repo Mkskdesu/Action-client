@@ -1,0 +1,24 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 24px);
+    grid-auto-rows: 24px;
+    gap: 8px;
+    justify-content: center;
+
+    .days {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-row: 1;
+        grid-column: span 7;
+        align-items: center;
+        justify-items: center;
+
+        .sat {
+            color: rgb(50, 158, 190);
+        }
+
+        .sun {
+            color: rgb(221, 79, 54);
+        }
+    }
+}

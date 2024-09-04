@@ -7,6 +7,7 @@ import style from "./Dashboard.module.scss";
 import { CgChevronLeft, CgChevronRight } from "solid-icons/cg";
 import IconTextButton from "global/components/button/iconTextButton/IconTextButton";
 import clsx from "clsx";
+import GrassCalendar from "global/components/grassCalendar/grassCalendar";
 
 
 
@@ -29,6 +30,7 @@ export default () => {
                     </IconTextButton>
                     <button class={clsx(style.button, style.detailsbutton)}>詳細</button>
                 </div>
+                <GrassCalendar year={2024} month={8} data={[]} />
             </div>
         </div>
     )

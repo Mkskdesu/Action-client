@@ -1,0 +1,60 @@
+@import "global/styles/mixin.scss";
+
+.timer {
+    padding: 16px;
+    background-image: linear-gradient(to bottom, $sectionBackgroundPrimary, $sectionBackgroundSecondary);
+    border: 2px solid $sectionBorder;
+    border-radius: 12px;
+    /*     display: flex;
+    flex-direction: column;
+    justify-content: center; */
+
+    .tabWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .tabs {
+            display: flex;
+            column-gap: 8px;
+            background-color: $inputBackgroundPrimary;
+            padding: 0 8px;
+            margin: 0 auto;
+            border-radius: 8px;
+
+            button[data-active="true"] {
+                box-shadow: 0 0 4px 2px $accentColor;
+            }
+        }
+    }
+
+    .timerContentWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .noteWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .note {
+            background-color: $inputBackgroundPrimary;
+            display: inline-grid;
+            justify-content: center;
+            color: $grayText;
+            padding: 8px;
+            border-radius: 8px;
+
+            h3 {
+                display: inline;
+                margin: 0;
+            }
+        }
+    }
+
+
+
+
+}

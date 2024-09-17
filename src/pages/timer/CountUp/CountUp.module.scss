@@ -1,0 +1,23 @@
+.countUp {
+
+    .clock{
+        font-size: 64px;
+        font-feature-settings: "tnum";
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        column-gap: 16px;
+        justify-content: center;
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            svg{
+                height: 36px;
+                width: 36px;
+            }
+        }
+    }
+}

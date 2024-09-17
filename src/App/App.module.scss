@@ -2,6 +2,7 @@
 
 .app{
     height: 100dvh;
+    overflow: hidden;
     background-color: $pageBackground;
     color: $textColor;
     @include font-text;

@@ -1,6 +1,7 @@
 import clsx from "clsx"
 import getMonthData from "global/utils/getMonthData"
-import { JSX, onMount } from "solid-js"
+import { For, JSX } from "solid-js";
+import * as solid from "solid-js";
 
 import style from "./grassCalendar.module.scss";
 import classificatoryTaxonomy from "global/utils/classificatoryTaxonomy";
@@ -32,19 +33,20 @@ export default (props: glassCalendarProps) => {
 
         } else {
             for (let j = 0; j < 7; j++) {
-                data[i][j] = classificatoryTaxonomy(props.data[7 * i - (7 - firstDay)], q1, mid, q3);
+                data[i][j] = classificatoryTaxonomy(props.data[7 * i - firstDay], q1, mid, q3);
             }
         }
     }
 
-
     return (
         <div {...props} class={clsx(props.class, style.calendar)}>
             <div class={style.days}>
-                <span>月</span> <span>火</span> <span>水</span>
-                <span>木</span> <span>金</span> <span class={style.sat}>土</span> <span class={style.sun}>日</span>
+                <span class={style.sun}>日</span><span>月</span><span>火</span><span>水</span>
+                <span>木</span><span>金</span> <span class={style.sat}>土</span>
             </div>
+            <For each={data}>
 
+            </For>
         </div>
     )
 }

@@ -52,11 +52,11 @@ $fontHeader: "Zen Kaku Gothic", sans-serif;
 //$fadeIn: fadeIn;
 
 //color palette
-$pageBackground: rgb(17,21,31);
+$pageBackground: rgb(17, 21, 31);
 $pageBackgroundLight: rgb(225, 225, 225);
 $textColor: rgb(228, 245, 247);
-$textColorSecondary: rgb(20,20,20);
-$textColorLight: rgb(20,20,20);
+$textColorSecondary: rgb(20, 20, 20);
+$textColorLight: rgb(20, 20, 20);
 $grayText: rgb(180, 180, 180);
 $linkColor: rgb(54, 199, 199);
 
@@ -65,21 +65,34 @@ $shadowColor: rgb(220, 220, 220);
 $borderColor: rgb(7, 79, 92);
 
 $accentColor: rgb(64, 225, 239);
+$warn: rgb(230, 72, 44);
 
 $focusColor: rgb(231, 149, 47);
 
 $inputBackground: rgb(26, 27, 29);
 
 $inputBackgroundLightPrimary: rgb(221, 241, 250);
-$inputBackgroundPrimary: rgb(40,40,45);
+
+$inputBackgroundPrimary: rgb(55, 63, 90);
 $inputBackgroundSecondary: rgb(10, 26, 43);
-$inputBackgroundTrinity: rgb(55, 63, 90);
+$inputBackgroundTrinity: rgb(40, 40, 45);
 
 $headerBackground: rgb(31, 40, 63);
-$headerBackgroundLight: rgb(225,225,225);
+$headerBackgroundLight: rgb(225, 225, 225);
 
-$footerBackground: rgba(31, 40, 63,0.75);
+$footerBackground: rgba(31, 40, 63, 0.75);
 
 $sectionBackgroundPrimary: rgb(15, 23, 43);
 $sectionBackgroundSecondary: rgb(21, 27, 43);
 $sectionBorder: rgb(30, 36, 54);
+
+$saturday: rgb(50, 158, 190);
+$sunday: rgb(221, 79, 54);
+
+$glass0: rgba(163, 163, 163, 0.2);
+$glass1: rgba(145, 226, 137, 0.4);
+$glass2: rgba(116, 212, 107, 0.6);
+$glass3: rgba(98, 214, 87, 0.8);
+$glass4: rgb(95, 231, 82);
+
+$overlayColor: rgba(55, 55, 65, 0.8)

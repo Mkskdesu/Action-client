@@ -1,0 +1,86 @@
+@import "global/styles/mixin.scss";
+
+.daySelect {
+    display: grid;
+    grid-template-rows: 1px auto 1px;
+
+    hr {
+        border: none;
+        height: 1px;
+        width: 100%;
+        margin: 0;
+        background-image: linear-gradient(to right, transparent, $borderColor, transparent);
+    }
+
+    .selector {
+        display: grid;
+        grid-template-columns: 64px 1fr 64px auto 64px 1fr;
+        column-gap: 16px;
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(64px, auto));
+            align-items: center;
+            justify-content: center;
+            column-gap: 16px;
+
+            .dayButton {
+                display: flex;
+                flex-direction: column;
+                background-color: $inputBackgroundSecondary;
+
+                &[data-active="true"] {
+                    box-shadow: 0 0 4px 2px $accentColor;
+                }
+
+
+                .date {
+                    font-size: 1.2em;
+                }
+
+                .day {
+                    font-size: 0.8em;
+                    filter: brightness(0.9);
+                }
+
+                &:first-child {
+                    color: $sunday;
+                }
+
+                &:last-child {
+                    color: $saturday;
+                }
+            }
+        }
+
+        .calendarIcon {
+            min-width: 48px;
+        }
+
+        .calendarIcon,
+        .arrow {
+            transition: 0.2s;
+
+            svg {
+                transition: 0.2s;
+            }
+
+            &:hover {
+                background-color: $inputBackgroundPrimary;
+
+                svg {
+                    scale: 1.1;
+                }
+            }
+
+            &:active,
+            &:focus-visible {
+                filter: brightness(0.8);
+
+                svg {
+                    scale: 0.8;
+                }
+            }
+        }
+    }
+}

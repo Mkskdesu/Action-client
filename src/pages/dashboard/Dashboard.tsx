@@ -1,20 +1,26 @@
-import { createEffect } from "solid-js";
+import { createEffect, onMount } from "solid-js";
+import { CgChevronLeft, CgChevronRight } from "solid-icons/cg";
+import clsx from "clsx";
+import dayjs from "dayjs";
+
 
 import { setPageTitle } from "global/states/pageTitleState";
 import IconButton from "global/components/button/iconButton/IconButton";
+import IconTextButton from "global/components/button/iconTextButton/IconTextButton";
+import GrassCalendar from "global/components/grassCalendar/grassCalendar";
+import getWeekNumber from "global/utils/getWeekNumber";
 
 import style from "./Dashboard.module.scss";
-import { CgChevronLeft, CgChevronRight } from "solid-icons/cg";
-import IconTextButton from "global/components/button/iconTextButton/IconTextButton";
-import clsx from "clsx";
-import GrassCalendar from "global/components/grassCalendar/grassCalendar";
-
+import { setBottomBarState } from "global/states/bottomBarState";
 
 
 export default () => {
 
-    createEffect(() => {
+    onMount(() => {
+
         setPageTitle("ホーム");
+        setBottomBarState("home");
+
     });
 
     return (
@@ -32,6 +38,14 @@ export default () => {
                 </div>
                 <GrassCalendar year={2024} month={8} data={[]} />
             </div>
+            <div class={style.weekCalendar}>
+                <div class={style.title}>
+                    <h2>今週の概要 - 第 {dayjs().week()} 週</h2>
+                    {/* <h2>{new Date().getFullYear()} 年 第 {getWeekNumber(new Date())} 週</h2> */}
+                </div>
+
+            </div>
+
         </div>
     )
 }

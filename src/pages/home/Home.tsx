@@ -2,12 +2,15 @@ import { createEffect, JSXElement } from "solid-js";
 import { setPageTitle } from "global/states/pageTitleState";
 
 import FullPageFrame from "global/components/frame/fullPageFrame/FullPageFrame";
-import Header from "global/components/Header/Header";
-import Footer from "global/components/Footer/Footer";
+import Header from "global/components/header/Header";
+import Footer from "global/components/footer/Footer";
+import Sidebar from "global/components/sidebar/sidebar";
 
-import style from "./Home.module.scss";
 import HomeRouter from "global/router/HomeRouter";
 import { Router } from "@solidjs/router";
+
+import style from "./Home.module.scss";
+
 
 interface homeProps {
     children?: JSXElement
@@ -23,7 +26,7 @@ export default (props: homeProps) => {
                 {props.children}
             </div>
             <Footer />
-
+            <Sidebar />
         </FullPageFrame>
     )
 }

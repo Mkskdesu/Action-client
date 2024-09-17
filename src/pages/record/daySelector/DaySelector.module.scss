@@ -53,8 +53,16 @@
             }
         }
 
+        .calendarIconWrapper {
+            min-width: 64px;
+            height: 100%;
+            position: relative;
+        }
+
         .calendarIcon {
-            min-width: 48px;
+            min-width: 64px;
+            height: 100%;
+            position: absolute;
         }
 
         .calendarIcon,

@@ -8,6 +8,8 @@ import R8Button from "global/components/button/r8Button/R8Button";
 
 import style from "./DaySelector.module.scss";
 import { recordDate, setRecordDate, setWeekCalendar, weekCalendar } from "../states/state";
+import DatePicker from "@rnwonder/solid-date-picker";
+import "@rnwonder/solid-date-picker/dist/style.css";
 
 
 interface daySelectorProps {
@@ -17,7 +19,7 @@ interface daySelectorProps {
 
 export default (props: daySelectorProps) => {
 
-    function updateWeekCalendar(offset: 1 | -1) {
+    function updateWeekCalendar(offset: 1 | 0 | -1) {
         if (offset == 1) props.calendarBase = props.calendarBase.add(1, "week");
         if (offset == -1) props.calendarBase = props.calendarBase.subtract(1, "week");
         setWeekCalendar(createWeekCalendar(props.calendarBase));
@@ -27,9 +29,24 @@ export default (props: daySelectorProps) => {
         <div class={style.daySelect}>
             <hr />
             <div class={style.selector}>
-                <IconButton class={style.calendarIcon}>
-                    <BsCalendar3 />
-                </IconButton>
+                <div class={style.calendarIconWrapper}>
+                    <DatePicker
+                        renderInput={({ showDate }) => (
+                            <IconButton class={style.calendarIcon} onClick={showDate}>
+                                <BsCalendar3 />
+                            </IconButton>
+                        )}
+                        onChange={data => {
+                            if (data.type !== 'single' || !data.selectedDate) return;
+                            console.log(data.selectedDate);
+
+                            props.calendarBase = dayjs().year(data.selectedDate.year || dayjs().year()).month(data.selectedDate.month || dayjs().month()).date(data.selectedDate.day || dayjs().date())
+                            setRecordDate(props.calendarBase.clone().startOf("day"));
+                            updateWeekCalendar(0);
+                        }}
+                    />
+                </div>
+
                 <div class={style.spacer}></div>
                 <IconButton class={style.arrow} onClick={() => updateWeekCalendar(-1)}>
                     <BsCaretLeftFill />

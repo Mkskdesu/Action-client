@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rnwonder/solid-date-picker": "^1.4.1",
     "@solidjs/router": "^0.14.3",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",

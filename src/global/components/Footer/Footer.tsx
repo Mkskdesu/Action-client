@@ -26,7 +26,7 @@ export default () => {
                     <BsPeople />
                     <span>ソーシャル</span>
                 </button>
-                <button onClick={() => navigate("timer")}>
+                <button onClick={() => navigate("timer")} data-active={bottomBarState() == "timer"}>
                     <BsClock />
                     <span>タイマー</span>
                 </button>

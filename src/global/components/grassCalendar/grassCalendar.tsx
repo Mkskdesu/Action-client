@@ -6,6 +6,7 @@ import * as solid from "solid-js";
 import style from "./grassCalendar.module.scss";
 import classificatoryTaxonomy from "global/utils/classificatoryTaxonomy";
 import getQuantile from "global/utils/getQuantile";
+import dayjs from "dayjs";
 
 
 interface glassCalendarProps extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -18,7 +19,10 @@ interface glassCalendarProps extends JSX.HTMLAttributes<HTMLDivElement> {
 
 export default (props: glassCalendarProps) => {
 
-    const [firstDay, monthLength] = getMonthData(props.year, props.month);
+    //const [firstDay, monthLength] = getMonthData(props.year, props.month);
+    const calendarBase = dayjs().year(props.year).month(props.month)
+    const firstDay = calendarBase.startOf("month").day();
+    const monthLength = calendarBase.endOf("month").date();
     const weeks = Math.ceil((monthLength - (7 - firstDay)) / 7) + 1;
     let data = [];
 
@@ -33,6 +37,8 @@ export default (props: glassCalendarProps) => {
 
         } else {
             for (let j = 0; j < 7; j++) {
+
+                if ((7 * i - firstDay + j) > (monthLength - firstDay)) continue;
                 data[i][j] = classificatoryTaxonomy(props.data[7 * i - firstDay], q1, mid, q3);
             }
         }

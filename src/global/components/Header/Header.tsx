@@ -5,6 +5,7 @@ import IconButton from '../button/iconButton/IconButton';
 
 import style from "./Header.module.scss";
 import { pageTitle } from 'global/states/pageTitleState';
+import { setSideBarState } from 'global/states/sidebarState';
 
 
 export default () => {
@@ -21,7 +22,7 @@ export default () => {
             <IconButton class={style.icon}>
                 <BsBell />
             </IconButton>
-            <IconButton class={style.icon}>
+            <IconButton class={style.icon} onClick={() => setSideBarState(true)}>
                 <BsGrid3x3GapFill />
             </IconButton>
         </header>

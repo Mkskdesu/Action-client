@@ -38,6 +38,7 @@ export default (props: glassCalendarProps) => {
         }
     }
 
+
     return (
         <div {...props} class={clsx(props.class, style.calendar)}>
             <div class={style.days}>
@@ -45,8 +46,29 @@ export default (props: glassCalendarProps) => {
                 <span>木</span><span>金</span> <span class={style.sat}>土</span>
             </div>
             <For each={data}>
-
+                {
+                    week => (
+                        <div class={style.weekRow}>
+                            <For each={week}>
+                                {
+                                    day =>
+                                        <div class={clsx(style.dayBlock)} data-color={day}></div>
+                                }
+                            </For>
+                        </div>
+                    )
+                }
             </For>
+            <hr class={style.belowCalendar} />
+            <div class={style.example}>
+                少
+                <div class={style.dayBlock} data-color={-1}></div>
+                <div class={style.dayBlock} data-color={0}></div>
+                <div class={style.dayBlock} data-color={1}></div>
+                <div class={style.dayBlock} data-color={2}></div>
+                <div class={style.dayBlock} data-color={3}></div>
+                多
+            </div>
         </div>
     )
 }

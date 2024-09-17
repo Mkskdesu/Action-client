@@ -1,0 +1,56 @@
+@import "global/styles/mixin.scss";
+
+.sidebar {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $overlayColor;
+    
+
+    &.enter{
+        animation: fadeIn 0.2s ease forwards;
+        .inner{
+            animation: slideIn 0.2s ease forwards;
+        }
+    }
+
+        &.exit {
+            animation: fadeOut 0.2s ease forwards;
+    
+            .inner {
+                animation: slideOut 0.2s ease forwards;
+            }
+        }
+
+    .inner {
+        position: absolute;
+        height: 100%;
+        width: 480px;
+        top: 0;
+        right: 0;
+        background-color: $pageBackground;
+        border-radius: 8px 0 0 8px;
+    }
+}
+
+
+@keyframes slideIn{
+    from{
+        right: -480px;
+    }
+    to{
+        right: 0;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -480px;
+    }
+}

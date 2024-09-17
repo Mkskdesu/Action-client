@@ -39,6 +39,19 @@
             align-items: center;
             justify-content: center;
             transition: 0.2s;
+            position: relative;
+
+            &[data-active="true"] {
+                &::after {
+                    content: "";
+                    background-color: $accentColor;
+                    height: 4px;
+                    width: 16px;
+                    bottom: 8px;
+                    border-radius: 4px;
+                    animation: bottomTipAnimation 0.2s ease forwards;
+                }
+            }
 
             svg {
                 transition: 0.2s;
@@ -68,5 +81,14 @@
                 }
             }
         }
+    }
+}
+
+@keyframes bottomTipAnimation{
+    from{
+        width: 0;
+    }
+    to{
+        width: 16px;
     }
 }

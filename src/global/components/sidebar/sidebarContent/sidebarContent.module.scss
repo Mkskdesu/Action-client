@@ -1,0 +1,86 @@
+@import "global/styles/mixin.scss";
+
+.content {
+    display: grid;
+    grid-template-rows: 64px 1fr auto;
+
+    .title {
+        height: 64px;
+        padding: 0 8px;
+        display: grid;
+        grid-template-columns: auto 1fr 64px;
+        align-items: center;
+        column-gap: 8px;
+
+        h1 {
+            font-family: "Kamaboko";
+            font-weight: normal;
+        }
+
+        .x {
+            height: 48px;
+            width: 48px;
+            border-radius: 8px;
+            transition: 0.2s;
+
+            &:hover,
+            &:focus-within {
+                box-shadow: 0 0 4px 2px $warn;
+            }
+
+            svg {
+                height: 36px;
+                width: 36px;
+            }
+        }
+    }
+
+    .main {
+
+        .linkButton {
+            all: unset;
+            display: block;
+            position: relative;
+            width: 100%;
+            transition: 0.2s;
+            padding: 16px 8px;
+            background-color: transparent;
+
+            &::before {
+                content: "";
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background-image: linear-gradient(to right, $accentColor, transparent);
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background-image: linear-gradient(to right, $inputBackgroundPrimary, transparent);
+                opacity: 0;
+                z-index: -1;
+                transition: 0.2s;
+            }
+
+            &:hover,
+            &:focus-visible {
+                transform: translate(0,0); // show background correctly 
+                &::after {
+                    opacity: 1;
+                }
+            }
+
+            &:active {
+                filter: brightness(0.8);
+                scale: 0.98;
+            }
+        }
+    }
+}

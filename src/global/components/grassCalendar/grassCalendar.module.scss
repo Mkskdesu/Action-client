@@ -1,3 +1,5 @@
+@import "global/styles/mixin.scss";
+
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 24px);
@@ -13,12 +15,69 @@
         align-items: center;
         justify-items: center;
 
-        .sat {
-            color: rgb(50, 158, 190);
+        :last-child{
+            color: $saturday;
         }
 
-        .sun {
-            color: rgb(221, 79, 54);
+        :first-child {
+            color: $sunday;
         }
+    }
+
+    .weekRow {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: span 7;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .belowCalendar {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: span 7;
+        height: 0;
+        padding: 0 16px;
+        background-color: transparent;
+        border: 1px solid;
+    }
+
+    .example {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: span 7;
+        align-items: center;
+        justify-items: center;
+        scale: 0.8;
+        .dayBlock{
+            height: 20px;
+            width: 20px;
+        }
+    }
+}
+
+.dayBlock {
+    height: 24px;
+    width: 24px;
+    border-radius: 4px;
+
+    &[data-color="-1"] {
+        background-color: $glass0;
+    }
+
+    &[data-color="0"] {
+        background-color: $glass1;
+    }
+
+    &[data-color="1"] {
+        background-color: $glass2;
+    }
+
+    &[data-color="2"] {
+        background-color: $glass3;
+    }
+
+    &[data-color="3"] {
+        background-color: $glass4;
     }
 }

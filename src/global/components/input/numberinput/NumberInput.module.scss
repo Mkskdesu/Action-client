@@ -17,9 +17,10 @@
         background-color: $inputBackgroundPrimary;
         border-radius: 4px;
         padding: 4px;
+        transition: 0.2s;
 
         &:focus {
-            box-shadow: 0 0 4px 2px $borderColor;
+            box-shadow: 0 0 4px 2px $accentColor;
         }
 
         &::-webkit-outer-spin-button,

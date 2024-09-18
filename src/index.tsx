@@ -3,6 +3,7 @@ import { isDev, render } from 'solid-js/web';
 import dayjs from "dayjs";
 import weekYear from 'dayjs/plugin/weekYear';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
+import duration from "dayjs/plugin/duration";
 import "dayjs/locale/ja";
 
 import App from './App/App';
@@ -17,16 +18,22 @@ window.addEventListener("load", () => {
         console.log("dayjs locale set.");
     } catch (error) {
         console.error(error);
-
     }
 
 
     try {
         dayjs.extend(weekYear);
         dayjs.extend(weekOfYear);
+        dayjs.extend(duration);
         console.log("dayjs plugin loaded");
     } catch (error) {
         console.error(error);
+    }
+
+    if (isDev) {
+        const chiiTag = document.createElement("script");
+        chiiTag.src = "http://localhost:25560/target.js";
+        document.body.appendChild(chiiTag);
     }
 
 

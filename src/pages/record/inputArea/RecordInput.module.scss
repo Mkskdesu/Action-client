@@ -7,10 +7,15 @@
     padding: 4px 8px;
     flex-basis: 240px;
     max-width: 480px;
-    flex-grow: 2;
+    flex-grow: auto;
     display: flex;
     flex-direction: column;
     row-gap: 8px;
+    transition: 0.2s;
+
+    &:focus-within{
+        box-shadow: 0 0 4px 2px $borderColor;
+    }
 
 
     .timeInput {

@@ -1,4 +1,4 @@
-import { JSX, Show, splitProps } from "solid-js";
+import { JSX, onCleanup, onMount, Show, splitProps } from "solid-js";
 
 import style from "./NumberInput.module.scss";
 import { BsCaretDownFill, BsCaretUpFill } from "solid-icons/bs";
@@ -12,22 +12,39 @@ interface numberInputProps extends JSX.HTMLAttributes<HTMLInputElement> {
     step?: number
     value?: number
     nospin?: boolean
+    onUpdate?: (e:number) => unknown
 }
 
 export default (props: numberInputProps) => {
 
-    const [local, others] = splitProps(props, ["class"]);
+    const [local, others] = splitProps(props, ["class", "onUpdate"]);
 
     let inputRef: HTMLInputElement | undefined;
 
+    onMount(()=>{
+        inputRef?.addEventListener("input",e=>{
+            props.onUpdate && props.onUpdate(Number((e.target as HTMLInputElement).value))
+        });
+    });
+
+    onCleanup(() => {
+        inputRef?.removeEventListener("input", e => {
+            props.onUpdate && props.onUpdate(Number((e.target as HTMLInputElement).value))
+        });
+    });
+
     function spinUp() {
         if (!inputRef) return;
-        inputRef.value = (Math.min(Number(inputRef.value) + (props.step || 1), props.max ?? Infinity)).toString();
+        const newValue = (Math.min(Number(inputRef.value) + (props.step || 1), props.max ?? Infinity)).toString();
+        inputRef.value = newValue;
+        props.onUpdate && props.onUpdate(Number(newValue));
     }
 
     function spinDown() {
         if (!inputRef) return;
-        inputRef.value = (Math.max(Number(inputRef.value) - (props.step || 1), props.min ?? -Infinity)).toString();
+        const newValue = (Math.max(Number(inputRef.value) - (props.step || 1), props.min ?? -Infinity)).toString();
+        inputRef.value = newValue;
+        props.onUpdate && props.onUpdate(Number(newValue));
     }
 
     return (

@@ -6,6 +6,7 @@ import IconButton from '../button/iconButton/IconButton';
 import style from "./Header.module.scss";
 import { pageTitle } from 'global/states/pageTitleState';
 import { setSideBarState } from 'global/states/sidebarState';
+import { setShowNotification } from 'global/states/notificationState';
 
 
 export default () => {
@@ -19,7 +20,7 @@ export default () => {
                 <AiOutlineUser />
                 USER
             </div>
-            <IconButton class={style.icon}>
+            <IconButton class={style.icon} onClick={()=> setShowNotification(true)}>
                 <BsBell />
             </IconButton>
             <IconButton class={style.icon} onClick={() => setSideBarState(true)}>

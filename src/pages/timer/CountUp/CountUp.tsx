@@ -3,7 +3,7 @@ import style from "./CountUp.module.scss";
 import { BsArrowCounterclockwise, BsCaretRightFill, BsPauseFill } from "solid-icons/bs";
 import { setTimerState, timerState } from "global/states/timerState";
 import { getTime, resetTimer, startTimer, stopTimer } from "@/features/timerbackend/countup";
-import { createEffect, createSignal, Show } from "solid-js";
+import { createEffect, createSignal, onMount, Show } from "solid-js";
 
 
 export default () => {
@@ -17,6 +17,10 @@ export default () => {
             timerInterval = setInterval(parseTimer, 100);
         }
     });
+
+    onMount(() => {
+        parseTimer();
+    })
 
     function parseTimer() {
         let value = getTime();
@@ -44,10 +48,10 @@ export default () => {
                     <R8Button class={style.button} onClick={() => { setTimerState("paused"); stopTimer(); }}>
                         <BsPauseFill />
                     </R8Button>
-                    <R8Button class={style.button} onClick={() => { setTimerState("paused"); resetTimer(); }}>
-                        <BsArrowCounterclockwise />
-                    </R8Button>
                 </Show>
+                <R8Button class={style.button} onClick={() => { setTimerState("paused"); resetTimer(); }}>
+                    <BsArrowCounterclockwise />
+                </R8Button>
             </div>
 
         </div >

@@ -32,6 +32,9 @@
         right: 0;
         background-color: $pageBackground;
         border-radius: 8px 0 0 8px;
+        @media screen and (max-width:480px){
+            width: calc(100% - 24px);
+        }
     }
 }
 

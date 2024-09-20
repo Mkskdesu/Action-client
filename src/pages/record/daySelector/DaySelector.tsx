@@ -1,16 +1,16 @@
 import { Accessor, For, Setter, Signal } from "solid-js";
 import { BsCalendar3, BsCaretLeftFill, BsCaretRightFill } from "solid-icons/bs";
 import dayjs from "dayjs";
+import DatePicker from "@rnwonder/solid-date-picker";
 
 import createWeekCalendar from "global/utils/createWeekCalendar";
 import IconButton from "global/components/button/iconButton/IconButton";
 import R8Button from "global/components/button/r8Button/R8Button";
+import { recordDate, setRecordDate, setWeekCalendar, weekCalendar } from "../states/state";
 
 import style from "./DaySelector.module.scss";
-import { recordDate, setRecordDate, setWeekCalendar, weekCalendar } from "../states/state";
-import DatePicker from "@rnwonder/solid-date-picker";
 import "@rnwonder/solid-date-picker/dist/style.css";
-
+import "@rnwonder/solid-date-picker/themes/ark-ui"
 
 interface daySelectorProps {
 
@@ -31,6 +31,7 @@ export default (props: daySelectorProps) => {
             <div class={style.selector}>
                 <div class={style.calendarIconWrapper}>
                     <DatePicker
+                        data-theme={"dark"}
                         renderInput={({ showDate }) => (
                             <IconButton class={style.calendarIcon} onClick={showDate}>
                                 <BsCalendar3 />

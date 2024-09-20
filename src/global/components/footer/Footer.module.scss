@@ -8,10 +8,11 @@
     justify-content: center;
     background-image: linear-gradient(to bottom, transparent, $pageBackground);
     position: absolute;
-    bottom: 8px;
+    bottom: 0;
+    padding-bottom: 8px;
 
     @media screen and (max-width:480px) {
-        bottom: 0;
+        padding-bottom: 0;
     }
 
     .content {
@@ -84,11 +85,12 @@
     }
 }
 
-@keyframes bottomTipAnimation{
-    from{
+@keyframes bottomTipAnimation {
+    from {
         width: 0;
     }
-    to{
+
+    to {
         width: 16px;
     }
 }

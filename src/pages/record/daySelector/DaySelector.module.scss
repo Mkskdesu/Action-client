@@ -17,12 +17,21 @@
         grid-template-columns: 64px 1fr 64px auto 64px 1fr;
         column-gap: 16px;
 
+        @media screen and (max-width:768px) {
+            column-gap: 4px;
+        }
+
         .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, minmax(64px, auto));
+            display: flex;
+            flex-wrap: wrap;
+            //grid-template-columns: repeat(7, minmax(64px, auto));
             align-items: center;
             justify-content: center;
             column-gap: 16px;
+
+            @media screen and (max-width:768px) {
+                column-gap: 4px;
+            }
 
             .dayButton {
                 display: flex;
@@ -36,6 +45,10 @@
 
                 .date {
                     font-size: 1.2em;
+
+                    @media screen and (max-width:768px) {
+                        font-size: 1em;
+                    }
                 }
 
                 .day {

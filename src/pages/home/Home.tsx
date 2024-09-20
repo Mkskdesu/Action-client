@@ -10,6 +10,7 @@ import HomeRouter from "global/router/HomeRouter";
 import { Router } from "@solidjs/router";
 
 import style from "./Home.module.scss";
+import Notification from "global/components/notification/Notification";
 
 
 interface homeProps {
@@ -26,6 +27,7 @@ export default (props: homeProps) => {
                 {props.children}
             </div>
             <Footer />
+            <Notification />
             <Sidebar />
         </FullPageFrame>
     )

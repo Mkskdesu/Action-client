@@ -13,7 +13,8 @@
 .content {
     display: grid;
     justify-content: center;
-    hr{
+
+    hr {
         width: 100%;
         border-color: $grayText;
     }
@@ -22,6 +23,7 @@
 .loginForm {
     display: grid;
     justify-content: center;
+
     .inputSection {
         margin: 8px 0;
         display: flex;
@@ -75,11 +77,15 @@
             filter: brightness(0.8);
             scale: 0.98;
         }
+
+        &:disabled{
+            filter: brightness(0.5);
+        }
     }
 }
 
-.support{
-    p{
+.support {
+    p {
         color: $grayText;
     }
 }

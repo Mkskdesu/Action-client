@@ -8,11 +8,13 @@ import R8Button from "global/components/button/r8Button/R8Button";
 
 import style from "./Login.module.scss";
 import { baseUrl } from "global/constants/baseUrl";
+import { setData } from "@/features/afterLogin/afterLogin";
 
 
 export default () => {
 
     const [showPassword, setShowPassword] = createSignal(false);
+    const [disabled, setDisabled] = createSignal(true);
 
     const userIdUuid = uuidv4();
     const passwordUuid = uuidv4();
@@ -23,7 +25,7 @@ export default () => {
     }
 
     onMount(() => {
-        const aaa = new Promise((resolve, reject) => {
+        new Promise<void>((resolve, reject) => {
             const url = new URL(baseUrl)
             url.pathname = "/users/autologin";
             fetch(url, {
@@ -31,13 +33,16 @@ export default () => {
                     "Origin": location.hostname
                 }
             }).then(async data => {
-                console.log(data);
-
-                console.log(data.status);
-
-            }).catch(err => {
-                console.error(err)
-            })
+                const json = await data.json();
+                if (data.status != 200 || !json.successful) {
+                    setDisabled(false); resolve();
+                } else {
+                    return json;
+                }
+            }).then(setData)
+                .catch(err => {
+                    console.error(err)
+                })
         })
     })
 
@@ -58,7 +63,7 @@ export default () => {
                         <label for={`login-${passwordUuid}`}>パスワード</label>
                         <div class={style.passwordInput}>
                             <input type={showPassword() ? "text" : "password"} id={`login-${passwordUuid}`} />
-                            <button onClick={toggleShowPassword} class={style.passwordToggle} >
+                            <button onClick={toggleShowPassword} class={style.passwordToggle} disabled={disabled()}>
                                 {showPassword() ? <BsEyeSlash /> : <BsEye />}
                             </button>
                         </div>

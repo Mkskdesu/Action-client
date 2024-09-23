@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 import { BsEye, BsEyeSlash } from 'solid-icons/bs'
 import { A } from "@solidjs/router";
@@ -7,6 +7,7 @@ import FullPageFrame from "global/components/frame/fullPageFrame/FullPageFrame"
 import R8Button from "global/components/button/r8Button/R8Button";
 
 import style from "./Login.module.scss";
+import { baseUrl } from "global/constants/baseUrl";
 
 
 export default () => {
@@ -20,6 +21,25 @@ export default () => {
         setShowPassword(p => !p);
         document.getElementById(`login-${passwordUuid}`)?.focus();
     }
+
+    onMount(() => {
+        const aaa = new Promise((resolve, reject) => {
+            const url = new URL(baseUrl)
+            url.pathname = "/users/autologin";
+            fetch(url, {
+                headers: {
+                    "Origin": location.hostname
+                }
+            }).then(async data => {
+                console.log(data);
+
+                console.log(data.status);
+
+            }).catch(err => {
+                console.error(err)
+            })
+        })
+    })
 
     return (
         <FullPageFrame class={style.login}>
@@ -43,7 +63,7 @@ export default () => {
                             </button>
                         </div>
                     </div>
-                    
+
                     <R8Button class={style.loginButton}>
                         ログイン
                     </R8Button>

@@ -9,6 +9,7 @@ import "dayjs/locale/ja";
 import App from './App/App';
 
 import "global/styles/style.scss";
+import initLocalStorage from './features/localStorage/init';
 
 
 window.addEventListener("load", () => {
@@ -36,8 +37,10 @@ window.addEventListener("load", () => {
         document.body.appendChild(chiiTag);
     }
 
+    initLocalStorage();
 
-    const root = document.getElementById('root')
+
+    const root = document.getElementById('root');
     render(() => <App />, root!);
 
     console.log("ACTION is ready.");

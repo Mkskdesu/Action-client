@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 
-import { MemoryRouter, Router as SolidRouter } from "@solidjs/router";
+import { MemoryRouter, HashRouter as SolidRouter } from "@solidjs/router";
 
 import PageRouter from "global/router/PageRouter";
 

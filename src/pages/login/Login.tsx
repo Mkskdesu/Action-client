@@ -1,7 +1,7 @@
 import { createSignal, onMount } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 import { BsEye, BsEyeSlash } from 'solid-icons/bs'
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 
 import FullPageFrame from "global/components/frame/fullPageFrame/FullPageFrame"
 import R8Button from "global/components/button/r8Button/R8Button";
@@ -15,6 +15,8 @@ export default () => {
 
     const [showPassword, setShowPassword] = createSignal(false);
     const [disabled, setDisabled] = createSignal(true);
+
+    const navigate = useNavigate();
 
     const userIdUuid = uuidv4();
     const passwordUuid = uuidv4();
@@ -40,6 +42,7 @@ export default () => {
                     return json;
                 }
             }).then(setData)
+                .then(() => navigate("/~"))
                 .catch(err => {
                     console.error(err)
                 })

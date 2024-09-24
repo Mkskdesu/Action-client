@@ -59,6 +59,14 @@
         }
     }
 
+    .error{
+        word-wrap: break-word;
+        word-break: break-all;
+        color: $warn;
+        max-width: 100%;
+        //background-color: $warn-bg;
+    }
+
     .loginButton {
         color: $textColorSecondary;
         text-align: center;
@@ -67,6 +75,11 @@
         margin: 8px 0;
         background-color: $inputBackgroundLightPrimary;
         transition: 0.2s;
+
+        svg{
+            animation: rotate 1s ease infinite;
+            //transform: rotate(180deg);
+        }
 
         &:focus,
         &:hover {
@@ -80,6 +93,7 @@
 
         &:disabled{
             filter: brightness(0.5);
+            pointer-events: none;
         }
     }
 }
@@ -87,5 +101,14 @@
 .support {
     p {
         color: $grayText;
+    }
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(359deg);
     }
 }

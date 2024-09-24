@@ -1,7 +1,8 @@
-import { createSignal, onMount } from "solid-js";
+import { createSignal, onMount, Show } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 import { BsEye, BsEyeSlash } from 'solid-icons/bs'
 import { A, useNavigate } from "@solidjs/router";
+import { AiOutlineLoading3Quarters } from 'solid-icons/ai'
 
 import FullPageFrame from "global/components/frame/fullPageFrame/FullPageFrame"
 import R8Button from "global/components/button/r8Button/R8Button";
@@ -9,12 +10,14 @@ import R8Button from "global/components/button/r8Button/R8Button";
 import style from "./Login.module.scss";
 import { baseUrl } from "global/constants/baseUrl";
 import { setData } from "@/features/afterLogin/afterLogin";
+import { autoLogin, login } from "@/features/login/login";
 
 
 export default () => {
 
     const [showPassword, setShowPassword] = createSignal(false);
     const [disabled, setDisabled] = createSignal(true);
+    const [errorMessage, setErrorMessage] = createSignal("");
 
     const navigate = useNavigate();
 
@@ -27,27 +30,32 @@ export default () => {
     }
 
     onMount(() => {
-        new Promise<void>((resolve, reject) => {
-            const url = new URL(baseUrl)
-            url.pathname = "/users/autologin";
-            fetch(url, {
-                headers: {
-                    "Origin": location.hostname
-                }
-            }).then(async data => {
-                const json = await data.json();
-                if (data.status != 200 || !json.successful) {
-                    setDisabled(false); resolve();
-                } else {
-                    return json;
-                }
-            }).then(setData)
-                .then(() => navigate("/~"))
-                .catch(err => {
-                    console.error(err)
-                })
-        })
-    })
+        autoLogin()
+            .then(() => navigate("/~"))
+            .catch(err => {
+                console.error(err);
+                setDisabled(false);
+            })
+
+    });
+
+    function tryLogin() {
+        setDisabled(true);
+        setErrorMessage("")
+        const username = (document.getElementById(`login-${userIdUuid}`) as HTMLInputElement).value;
+        const password = (document.getElementById(`login-${passwordUuid}`) as HTMLInputElement).value;
+        if (!username || !password) {
+            setErrorMessage("パスワードまたはユーザー名を入力してください。");
+            setDisabled(false);
+            return;
+        }
+        login(username, password)
+            .then(() => navigate("/~"))
+            .catch((e: [string, number]) => {
+                setErrorMessage(`E${e[1]}: ${e[0]}`)
+                setDisabled(false);
+            })
+    }
 
     return (
         <FullPageFrame class={style.login}>
@@ -66,14 +74,19 @@ export default () => {
                         <label for={`login-${passwordUuid}`}>パスワード</label>
                         <div class={style.passwordInput}>
                             <input type={showPassword() ? "text" : "password"} id={`login-${passwordUuid}`} />
-                            <button onClick={toggleShowPassword} class={style.passwordToggle} disabled={disabled()}>
+                            <button onClick={toggleShowPassword} class={style.passwordToggle} >
                                 {showPassword() ? <BsEyeSlash /> : <BsEye />}
                             </button>
                         </div>
                     </div>
-
-                    <R8Button class={style.loginButton}>
-                        ログイン
+                    {/*fix word break */}
+                    <span class={style.error}>
+                        {errorMessage()}
+                    </span>
+                    <R8Button class={style.loginButton} onClick={tryLogin} disabled={disabled()}>
+                        <Show when={disabled()} fallback="ログイン">
+                            <AiOutlineLoading3Quarters />
+                        </Show>
                     </R8Button>
                 </div>
                 <hr />

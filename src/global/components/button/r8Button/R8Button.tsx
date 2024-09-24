@@ -4,7 +4,7 @@ import style from "./r8Button.module.scss";
 import clsx from "clsx";
 
 
-export default (props: JSX.HTMLAttributes<HTMLButtonElement>) => {
+export default (props: JSX.ButtonHTMLAttributes<HTMLButtonElement> & JSX.HTMLAttributes<HTMLButtonElement>) => {
     return (
         <button {...props} class={clsx(props.class, style.r8Button)}>
             {props.children}

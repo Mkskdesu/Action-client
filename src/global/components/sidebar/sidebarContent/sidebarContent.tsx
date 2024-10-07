@@ -47,7 +47,7 @@ export default () => {
                 </button>
             </div>
             <div class={style.footer}>
-                Copyright &#169; 2024 Action creating Team all rights reserved.
+                Copyright &#169; 2024 202-6-F-7 Action creating Team all rights reserved.
             </div>
         </div>
     )

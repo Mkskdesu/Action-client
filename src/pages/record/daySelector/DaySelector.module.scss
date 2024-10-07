@@ -21,6 +21,12 @@
             column-gap: 4px;
         }
 
+        @media screen and (max-width:630px) {
+            grid-template-columns: 32px 1fr 32px auto 32px 1fr;
+        }
+
+
+
         .calendar {
             display: flex;
             flex-wrap: wrap;
@@ -38,6 +44,10 @@
                 flex-direction: column;
                 background-color: $inputBackgroundSecondary;
 
+                @media screen and (max-width:480px) {
+                    padding: 4px;
+                }
+
                 &[data-active="true"] {
                     box-shadow: 0 0 4px 2px $accentColor;
                 }
@@ -48,6 +58,10 @@
 
                     @media screen and (max-width:768px) {
                         font-size: 1em;
+                    }
+
+                    @media screen and (max-width:630px) {
+                        font-size: 0.8em;
                     }
                 }
 

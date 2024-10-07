@@ -43,7 +43,9 @@ export default () => {
                     <h2>今週の概要 - 第 {dayjs().week()} 週</h2>
                     {/* <h2>{new Date().getFullYear()} 年 第 {getWeekNumber(new Date())} 週</h2> */}
                 </div>
-
+                    <span class={style.placeholder}>
+                    表示するものがないようです.他のものをを見てみましょう！
+                    </span>
             </div>
 
         </div>

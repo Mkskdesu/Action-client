@@ -66,7 +66,7 @@ export default () => {
                 <div class={clsx(style.locationOverlay, style.overlay)}>
                     <div class={style.title}>
                         <span>Location Overlay (Shift+F3)</span>
-                        <button class={style.x} onClick={() => setShowMainOverlay(false)}><BsX></BsX></button>
+                        <button class={style.x} onClick={() => setShowLocationOverlay(false)}><BsX></BsX></button>
                     </div>
                     <div class={style.content}>
                         <button onClick={() => location.hash = "#/~"}><BsHouse /></button>

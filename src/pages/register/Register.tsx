@@ -15,7 +15,7 @@ import UserDetailsForm from "./userDetailsForm/UserDetailsForm";
 
 
 export default () => {
-    const [page, setPage] = createSignal(1);
+    const [page, setPage] = createSignal(0);
 
     onMount(() => {
         setUserData(reconcile(defaultData))

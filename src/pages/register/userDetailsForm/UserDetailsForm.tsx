@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { createSignal, Match, Setter, Show, Switch } from "solid-js";
 
-import style from "./userDetailsForm.module.scss";
+import style from "./UserDetailsForm.module.scss";
 import SelectBox from "global/components/selectbox/normalSelectBox/NormalSelectBox";
 import R8Button from "global/components/button/r8Button/R8Button";
 import { AiOutlineLoading3Quarters } from "solid-icons/ai";

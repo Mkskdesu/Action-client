@@ -6,7 +6,7 @@ import { BsEyeSlash, BsEye } from "solid-icons/bs";
 import { createSignal, Setter, Show } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 
-import style from "./baseInputForm.module.scss";
+import style from "./BaseInputForm.module.scss";
 import { setUserData } from "../states/formState";
 
 

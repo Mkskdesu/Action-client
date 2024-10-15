@@ -1,31 +1,5 @@
 @import "global/styles/mixin.scss";
 
-.login {}
-
-.heading {
-    font-family: "Kamaboko";
-    font-size: 2em;
-    height: 64px;
-    display: grid;
-    grid-template-columns: auto;
-}
-
-.wrapper {
-    display: grid;
-    justify-content: center;
-}
-
-.content {
-    width: 240px;
-    display: grid;
-    justify-content: center;
-
-    hr {
-        width: 100%;
-        border-color: $grayText;
-    }
-}
-
 .loginForm {
     display: grid;
     justify-content: center;
@@ -59,15 +33,14 @@
         border-radius: 8px;
         padding: 6px;
         background-color: $inputBackgroundLightPrimary;
-        transition: 0.2s;
         @include font-text;
-        
+
         &:focus {
             box-shadow: 0 0 4px 2px $accentColor;
         }
     }
 
-    .error{
+    .error {
         word-wrap: break-word;
         word-break: break-all;
         color: $warn;
@@ -85,7 +58,7 @@
         background-color: $inputBackgroundLightPrimary;
         transition: 0.2s;
 
-        svg{
+        svg {
             animation: rotate 1s ease infinite;
             //transform: rotate(180deg);
         }
@@ -100,7 +73,7 @@
             scale: 0.98;
         }
 
-        &:disabled{
+        &:disabled {
             filter: brightness(0.5);
             pointer-events: none;
         }
@@ -114,10 +87,11 @@
 }
 
 @keyframes rotate {
-    from{
+    from {
         transform: rotate(0);
     }
-    to{
+
+    to {
         transform: rotate(359deg);
     }
 }

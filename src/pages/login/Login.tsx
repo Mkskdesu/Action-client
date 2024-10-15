@@ -63,37 +63,39 @@ export default () => {
                 <span> Action</span>
             </div>
 
-            <div class={style.content}>
-                <div class={style.loginForm}>
-                    <h2>ログイン</h2>
-                    <div class={style.inputSection}>
-                        <label for={`login-${userIdUuid}`}>ユーザーID</label>
-                        <input type="text" id={`login-${userIdUuid}`} />
-                    </div>
-                    <div class={style.inputSection}>
-                        <label for={`login-${passwordUuid}`}>パスワード</label>
-                        <div class={style.passwordInput}>
-                            <input type={showPassword() ? "text" : "password"} id={`login-${passwordUuid}`} />
-                            <button onClick={toggleShowPassword} class={style.passwordToggle} >
-                                {showPassword() ? <BsEyeSlash /> : <BsEye />}
-                            </button>
+            <div class={style.wrapper}>
+                <div class={style.content}>
+                    <div class={style.loginForm}>
+                        <h2>ログイン</h2>
+                        <div class={style.inputSection}>
+                            <label for={`login-${userIdUuid}`}>ユーザーID</label>
+                            <input type="text" id={`login-${userIdUuid}`} />
                         </div>
+                        <div class={style.inputSection}>
+                            <label for={`login-${passwordUuid}`}>パスワード</label>
+                            <div class={style.passwordInput}>
+                                <input type={showPassword() ? "text" : "password"} id={`login-${passwordUuid}`} />
+                                <button onClick={toggleShowPassword} class={style.passwordToggle} >
+                                    {showPassword() ? <BsEyeSlash /> : <BsEye />}
+                                </button>
+                            </div>
+                        </div>
+                        {/*fix word break */}
+                        <span class={style.error}>
+                            {errorMessage()}
+                        </span>
+                        <R8Button class={style.loginButton} onClick={tryLogin} disabled={disabled()}>
+                            <Show when={disabled()} fallback="ログイン">
+                                <AiOutlineLoading3Quarters />
+                            </Show>
+                        </R8Button>
                     </div>
-                    {/*fix word break */}
-                    <span class={style.error}>
-                        {errorMessage()}
-                    </span>
-                    <R8Button class={style.loginButton} onClick={tryLogin} disabled={disabled()}>
-                        <Show when={disabled()} fallback="ログイン">
-                            <AiOutlineLoading3Quarters />
-                        </Show>
-                    </R8Button>
-                </div>
-                <hr />
-                <div class={style.support}>
-                    <p>ログインできませんか？</p>
-                    <A href="">パスワードを忘れた</A> <br />
-                    <A href="/register">新規登録</A>
+                    <hr />
+                    <div class={style.support}>
+                        <p>ログインできませんか？</p>
+                        <A href="">パスワードを忘れた</A> <br />
+                        <A href="/register">新規登録</A>
+                    </div>
                 </div>
             </div>
         </FullPageFrame>

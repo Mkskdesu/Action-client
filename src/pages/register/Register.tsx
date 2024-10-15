@@ -11,7 +11,7 @@ import userExists from "@/features/userExists/userExists";
 import BaseInputForm from "./baseInputForm/BaseInputForm";
 import { defaultData, setUserData } from "./states/formState";
 import { reconcile } from "solid-js/store";
-import UserDetailsForm from "./userDetailsForm/userDetailsForm";
+import UserDetailsForm from "./userDetailsForm/UserDetailsForm";
 
 
 export default () => {

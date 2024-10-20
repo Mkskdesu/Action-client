@@ -11,7 +11,7 @@ import GrassCalendar from "global/components/grassCalendar/grassCalendar";
 import getWeekNumber from "global/utils/getWeekNumber";
 
 import style from "./Dashboard.module.scss";
-import WeeklyGraph from "global/components/weeklyGraph/weeklyGraph";
+import WeeklyGraph from "global/components/weeklyGraph/WeeklyGraph";
 import ToggleInput from "global/components/input/toggleInput/ToggleInput";
 
 

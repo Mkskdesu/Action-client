@@ -4,11 +4,11 @@ interface aiSessionOptions {
 async function checkEdgeAIAvaliable() {
     if (!window.ai) return false;
     const avaliable = await window.ai.canCreateTextSession();
-    if (avaliable = "no") return false;
+    if (avaliable == "no") return false;
     else return true;
 }
 
-class aiSession {
+export default class aiSession {
     mode = "auto";
     ready = false;
     constructor(options: aiSessionOptions) {

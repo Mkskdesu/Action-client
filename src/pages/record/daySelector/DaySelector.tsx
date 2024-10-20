@@ -1,5 +1,5 @@
-import { Accessor, For, Setter, Signal } from "solid-js";
-import { BsCalendar3, BsCaretLeftFill, BsCaretRightFill } from "solid-icons/bs";
+import { Accessor, For, Setter, Show, Signal } from "solid-js";
+import { BsCalendar3, BsCaretLeftFill, BsCaretRightFill, BsCheckCircleFill } from "solid-icons/bs";
 import dayjs from "dayjs";
 import DatePicker from "@rnwonder/solid-date-picker";
 
@@ -11,6 +11,7 @@ import { recordDate, setRecordDate, setWeekCalendar, weekCalendar } from "../sta
 import style from "./DaySelector.module.scss";
 import "@rnwonder/solid-date-picker/dist/style.css";
 import "@rnwonder/solid-date-picker/themes/ark-ui"
+import recordExists from "@/features/RecordExists/recordExists";
 
 interface daySelectorProps {
 
@@ -56,12 +57,17 @@ export default (props: daySelectorProps) => {
                     <For each={weekCalendar()}>
                         {data => (
                             <R8Button class={style.dayButton} onClick={() => setRecordDate(data)} data-active={data.isSame(recordDate())} >
-                                <span class={style.date}>
-                                    {data.format("MM/DD")}
-                                </span>
-                                <span class={style.day}>
-                                    {data.format("ddd")}
-                                </span>
+                                <div class={style.datecontainer}>
+                                    <span class={style.date}>
+                                        {data.format("MM/DD")}
+                                    </span>
+                                    <span class={style.day}>
+                                        {data.format("ddd")}
+                                    </span>
+                                </div>
+                                <Show when={recordExists(data)}>
+                                    <BsCheckCircleFill class={style.check} />
+                                </Show>
                             </R8Button>
                         )}
                     </For>
@@ -69,6 +75,7 @@ export default (props: daySelectorProps) => {
                 <IconButton class={style.arrow} onClick={() => updateWeekCalendar(1)}>
                     <BsCaretRightFill />
                 </IconButton>
+                <div class={style.spacer}></div>
                 <div class={style.spacer}></div>
             </div>
             <hr />

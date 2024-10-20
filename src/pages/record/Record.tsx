@@ -14,6 +14,7 @@ import R8Button from "global/components/button/r8Button/R8Button";
 import { BsX } from "solid-icons/bs";
 import { Transition } from "solid-transition-group";
 import { reconcile } from "solid-js/store";
+import deepmerge from "deepmerge";
 
 
 export default () => {
@@ -40,6 +41,25 @@ export default () => {
 
         setTotalStudyTime(total);
     });
+
+    createEffect(()=>{
+        const date = recordDate();
+        const record = JSON.parse(localStorage.getItem("record")||"{}");
+        const data = record?.[`y${date?.year()}`]?.[`m${date?.month()}`]?.[`d${date?.date()}`]
+        if(!data) return;
+        setRecord(reconcile({}));
+    });
+
+    function saveRecord() {
+        const date = recordDate();
+        if(!date) return;
+        const saved = JSON.parse(localStorage.getItem("record") || "{}");
+        const data:{[key:string]:{[key:string]:{[key:string]:object}}} = {};
+        data[`y${date.year()}`] = {};
+        data[`y${date.year()}`][`m${date.month()}`] = {}
+        data[`y${date.year()}`][`m${date.month()}`][`d${date.date()}`] = record;
+        localStorage.setItem("record",JSON.stringify(deepmerge.all([saved,data])));
+    }
 
     function modalEnter(e: Element, done: () => void) {
         e.classList.remove(style.exit);
@@ -78,7 +98,7 @@ export default () => {
                 <div class={style.buttonArea}>
                     <h3>総学習時間 : {dayjs.duration(totalStudyTime(), "minute").format("HH時間mm分")}</h3>
                     <R8Button class={style.clear} onClick={() => setShowResetModal(true)}>内容を消去</R8Button>
-                    <R8Button>この内容で保存する</R8Button>
+                    <R8Button onClick={saveRecord}>この内容で保存する</R8Button>
                 </div>
             </div>
             <Transition onEnter={modalEnter} onExit={modalExit}>

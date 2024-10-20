@@ -14,7 +14,7 @@
 
     .selector {
         display: grid;
-        grid-template-columns: 64px 1fr 64px auto 64px 1fr;
+        grid-template-columns: 64px 1fr 64px auto 64px 1fr 64px;
         column-gap: 16px;
 
         @media screen and (max-width:768px) {
@@ -22,7 +22,7 @@
         }
 
         @media screen and (max-width:630px) {
-            grid-template-columns: 32px 1fr 32px auto 32px 1fr;
+            grid-template-columns: 32px 1fr 32px auto 32px 1fr 32px;
         }
 
 
@@ -40,8 +40,7 @@
             }
 
             .dayButton {
-                display: flex;
-                flex-direction: column;
+                position: relative;
                 background-color: $inputBackgroundSecondary;
 
                 @media screen and (max-width:480px) {
@@ -50,6 +49,13 @@
 
                 &[data-active="true"] {
                     box-shadow: 0 0 4px 2px $accentColor;
+                }
+
+                .datecontainer {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
                 }
 
 
@@ -68,6 +74,13 @@
                 .day {
                     font-size: 0.8em;
                     filter: brightness(0.9);
+                }
+
+                .check{
+                    fill:rgb(127, 202, 13);
+                    position: absolute;
+                    top: -4px;
+                    right: -4px;
                 }
 
                 &:first-child {

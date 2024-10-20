@@ -24,3 +24,15 @@ body {
 a{
     color: $linkColor;
 }
+
+::-webkit-scrollbar{
+    width: 4px;
+    height: 2px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb{
+    width: 4px;
+    height: 2px;
+    background-color: $accentColor;
+    border-radius: 4px 0 0 4px;
+}

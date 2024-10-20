@@ -1,0 +1,32 @@
+@import "global/styles/mixin.scss";
+
+.toggle{
+    all:unset;
+    appearance: none;
+    position: relative;
+    width: 48px;
+    height: 24px;
+    border: 1px solid $borderColor;
+    border-radius: 12px;
+    background-color: $inputBackgroundPrimary;
+    transition: 0.2s;
+
+    &::after{
+        content: "";
+        position: absolute;
+        height: 12px;
+        width: 12px;
+        top: 6px;
+        left: 6px;
+        border-radius: 6px;
+        background-color: $textColor;
+        transition:0.2s;
+    }
+
+    &:checked{
+        background-color: $accentColor;
+        &::after{
+            left: 30px;
+        }
+    }
+}

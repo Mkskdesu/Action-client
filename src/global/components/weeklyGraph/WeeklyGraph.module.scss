@@ -1,0 +1,40 @@
+@import "global/styles/mixin.scss";
+
+.legends{
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+    justify-content: center;
+    .legend{
+        display: grid;
+        grid-template-columns: 16px auto;
+        align-items: center;
+        justify-content: center;
+        column-gap: 4px;
+        div{
+            height: 16px;
+            width: 16px;
+            border-radius: 4px;
+        }
+    }
+}
+
+.english{
+    background-color: $english;
+}
+.math{
+    background-color: $math;
+}
+.japanese{
+    background-color: $japanese;
+}
+.social{
+    background-color: $social
+}
+.science{
+    background-color: $science;
+}
+.other{
+    background-color: $other;
+}

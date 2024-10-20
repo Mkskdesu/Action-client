@@ -6,7 +6,7 @@ import { setPageTitle } from "global/states/pageTitleState";
 
 import createWeekCalendar from "global/utils/createWeekCalendar";
 import DaySelector from "./daySelector/DaySelector";
-import { record, recordDate, setRecord, setRecordDate, setWeekCalendar } from "./states/state";
+import { record, recordDate, resetRecord, setRecord, setRecordDate, setWeekCalendar } from "./states/state";
 
 import style from "./Record.module.scss";
 import RecordInput from "./inputArea/RecordInput";
@@ -42,23 +42,25 @@ export default () => {
         setTotalStudyTime(total);
     });
 
-    createEffect(()=>{
+    createEffect(() => {
         const date = recordDate();
-        const record = JSON.parse(localStorage.getItem("record")||"{}");
+        const record = JSON.parse(localStorage.getItem("record") || "{}");
         const data = record?.[`y${date?.year()}`]?.[`m${date?.month()}`]?.[`d${date?.date()}`]
-        if(!data) return;
-        setRecord(reconcile({}));
+        if (!data) resetRecord();
+        else setRecord(reconcile(data));
     });
 
     function saveRecord() {
         const date = recordDate();
-        if(!date) return;
+        console.log(record);
+        
+        if (!date) return;
         const saved = JSON.parse(localStorage.getItem("record") || "{}");
-        const data:{[key:string]:{[key:string]:{[key:string]:object}}} = {};
+        const data: { [key: string]: { [key: string]: { [key: string]: object } } } = {};
         data[`y${date.year()}`] = {};
         data[`y${date.year()}`][`m${date.month()}`] = {}
         data[`y${date.year()}`][`m${date.month()}`][`d${date.date()}`] = record;
-        localStorage.setItem("record",JSON.stringify(deepmerge.all([saved,data])));
+        localStorage.setItem("record", JSON.stringify(deepmerge.all([saved, data])));
     }
 
     function modalEnter(e: Element, done: () => void) {
@@ -115,7 +117,7 @@ export default () => {
                                 <b>この操作を取り消すことはできません！</b>
                             </p>
                             <div class={style.buttonArea}>
-                                <R8Button class={style.delete} onClick={() => { setRecord(reconcile({})); setShowResetModal(false) }}>
+                                <R8Button class={style.delete} onClick={() => { resetRecord(); setShowResetModal(false) }}>
                                     消去する
                                 </R8Button>
                                 <R8Button onClick={() => setShowResetModal(false)}>

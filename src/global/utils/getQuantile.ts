@@ -1,5 +1,7 @@
 function getQuantile(props: Array<number>, recursive = false): Array<number> {
-    const sorted = props.sort(((a, b) => a - b));
+    const sorted = [...props].sort(((a, b) => a - b));
+    //console.log(sorted);
+    
     const min = sorted[0];
     const max = sorted[sorted.length - 1];
     const mid = (sorted.length) % 2 == 0 ?

@@ -17,39 +17,40 @@ import ToggleInput from "global/components/input/toggleInput/ToggleInput";
 
 export default () => {
 
-    let graphAreaRef:HTMLDivElement|undefined;
+    let graphAreaRef: HTMLDivElement | undefined;
 
-    const [weekBase,setWeekBase] = createSignal(dayjs().startOf("week"));
-    const [graphUnit,setGraphUnit] = createSignal(false);
-    
+    const [weekBase, setWeekBase] = createSignal(dayjs().startOf("week"));
+    const [monthBase, setMonthBase] = createSignal(dayjs().startOf("month"));
+    const [graphUnit, setGraphUnit] = createSignal(false);
+
 
     onMount(() => {
-        
+
         setPageTitle("ホーム");
         setBottomBarState("home");
     });
 
-    
+
 
     return (
         <div class={style.dashboard}>
             <div class={style.grassCalendar}>
                 <div class={style.title}>
-                    <h2>{new Date().getFullYear()} 年 {new Date().getMonth() + 1} 月</h2>
-                    <IconTextButton class={style.button} icon={<CgChevronLeft />}>
+                    <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2>
+                    <IconTextButton class={style.button} icon={<CgChevronLeft />} onClick={()=>setMonthBase(p=>p.subtract(1,"month"))}>
                         前月
                     </IconTextButton>
-                    <IconTextButton class={style.button} icon={<CgChevronRight />}>
+                    <IconTextButton class={style.button} icon={<CgChevronRight />} onClick={() => setMonthBase(p => p.add(1, "month"))}>
                         次月
                     </IconTextButton>
                     <button class={clsx(style.button, style.detailsbutton)}>詳細</button>
                 </div>
-                <GrassCalendar year={2024} month={8} data={[]} />
+                <GrassCalendar {...{ monthBase }} />
             </div>
             <div class={style.weekCalendar}>
                 <div class={style.title}>
                     <h2>今週の概要 - 第 {weekBase().week()} 週</h2>
-                    <IconTextButton class={style.button} icon={<CgChevronLeft />} onClick={()=>setWeekBase(p=>p.subtract(1,"week"))}>
+                    <IconTextButton class={style.button} icon={<CgChevronLeft />} onClick={() => setWeekBase(p => p.subtract(1, "week"))}>
                         先週
                     </IconTextButton>
                     <IconTextButton class={style.button} icon={<CgChevronRight />} onClick={() => setWeekBase(p => p.add(1, "week"))} >
@@ -57,13 +58,13 @@ export default () => {
                     </IconTextButton>
 
                     <label>
-                        表示単位: 時間 <ToggleInput onChange={e=>{setGraphUnit(p=>!p)}} /> 分
+                        表示単位: 時間 <ToggleInput onChange={e => { setGraphUnit(p => !p) }} /> 分
                     </label>
                     {/* <h2>{new Date().getFullYear()} 年 第 {getWeekNumber(new Date())} 週</h2> */}
                 </div>
-                    <div class={style.graph} ref={graphAreaRef}>
-                        <WeeklyGraph {...{weekBase}} unit={graphUnit} />
-                    </div>
+                <div class={style.graph} ref={graphAreaRef}>
+                    <WeeklyGraph {...{ weekBase, graphUnit }} />
+                </div>
             </div>
 
         </div>

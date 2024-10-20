@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { createSignal } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createStore, reconcile } from "solid-js/store";
 
 
 const defaultRecord:recordDay = {
@@ -34,3 +34,7 @@ export const [recordDate, setRecordDate] = createSignal<dayjs.Dayjs>();
 export const [weekCalendar, setWeekCalendar] = createSignal<Array<dayjs.Dayjs>>([]);
 
 export const [record, setRecord] = createStore(defaultRecord);
+
+export function resetRecord(){
+    setRecord(reconcile(defaultRecord));
+}

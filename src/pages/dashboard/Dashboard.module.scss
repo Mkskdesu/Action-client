@@ -60,18 +60,34 @@
             display: grid;
             grid-template-columns: 1fr auto auto auto;
             column-gap: 16px;
+            align-items: center;
 
             h2 {
                 margin: 0;
             }
+
+            label{
+                display: flex;
+                align-items: center;
+            }
+
+            .button {
+                transition: 0.2s;
+                border-radius: 16px;
+                padding: 4px;
+                min-width: 48px;
+
+                &:hover,
+                &:focus-visible {
+                    background-color: $inputBackgroundPrimary;
+                }
+
+                &:active {
+                    filter: brightness(0.8);
+                    scale: 0.95;
+                }
+            }
         }
-        .placeholder{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            font-size: smaller;
-            color: $grayText;
-        }
+
     }
 }

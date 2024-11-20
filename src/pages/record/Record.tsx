@@ -15,6 +15,9 @@ import { BsX } from "solid-icons/bs";
 import { Transition } from "solid-transition-group";
 import { reconcile } from "solid-js/store";
 import deepmerge from "deepmerge";
+import {setShowResetModal, setShowSuccessModal, showSuccessModal} from "pages/record/states/modal.ts";
+import SuccessModal from "pages/record/modals/successModal/SuccessModal.tsx";
+import ResetModal from "pages/record/modals/resetModal/ResetModal.tsx";
 
 
 export default () => {
@@ -23,7 +26,7 @@ export default () => {
     let calendarBase = today.clone();
 
     const [totalStudyTime, setTotalStudyTime] = createSignal(0);
-    const [showResetModal, setShowResetModal] = createSignal(false);
+    
     setRecordDate(today);
 
     onMount(() => {
@@ -61,24 +64,9 @@ export default () => {
         data[`y${date.year()}`][`m${date.month()}`] = {}
         data[`y${date.year()}`][`m${date.month()}`][`d${date.date()}`] = record;
         localStorage.setItem("record", JSON.stringify(deepmerge.all([saved, data])));
+        setShowSuccessModal(true);
     }
 
-    function modalEnter(e: Element, done: () => void) {
-        e.classList.remove(style.exit);
-        e.classList.add(style.enter);
-        e.querySelector(`div.${style.inner}`)?.classList.remove(style.exit);
-        e.querySelector(`div.${style.inner}`)?.classList.add(style.enter);
-        done();
-    }
-    function modalExit(e: Element, done: () => void) {
-        e.classList.remove(style.enter);
-        e.classList.add(style.exit);
-        e.querySelector(`div.${style.inner}`)?.classList.remove(style.enter);
-        e.querySelector(`div.${style.inner}`)?.classList.add(style.exit);
-        setTimeout(() => {
-            done();
-        }, 500);
-    }
 
 
     return (
@@ -103,31 +91,10 @@ export default () => {
                     <R8Button onClick={saveRecord}>この内容で保存する</R8Button>
                 </div>
             </div>
-            <Transition onEnter={modalEnter} onExit={modalExit}>
-                <Show when={showResetModal()}>
-                    <div class={style.resetModal} onClick={() => setShowResetModal(false)}>
-                        <div class={style.inner} onClick={e => e.stopPropagation()}>
-                            <div class={style.title}>
-                                <h2>操作を行う前に</h2>
-                                <button onClick={() => setShowResetModal(false)} ><BsX /></button>
-                            </div>
-                            <hr />
-                            <p>
-                                入力内容を消去しますか？保存されているデータは変更されません。 <br />
-                                <b>この操作を取り消すことはできません！</b>
-                            </p>
-                            <div class={style.buttonArea}>
-                                <R8Button class={style.delete} onClick={() => { resetRecord(); setShowResetModal(false) }}>
-                                    消去する
-                                </R8Button>
-                                <R8Button onClick={() => setShowResetModal(false)}>
-                                    キャンセル
-                                </R8Button>
-                            </div>
-                        </div>
-                    </div>
-                </Show>
-            </Transition>
+            
+            <ResetModal/>
+            <SuccessModal/>
+            
         </div>
     )
 

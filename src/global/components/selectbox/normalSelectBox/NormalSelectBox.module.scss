@@ -79,6 +79,7 @@
         /*visibility: hidden;
         display: none; //when shown : flex */
         animation: hideSelector 0.2s ease forwards;
+        z-index: 99;
 
 
         .options {

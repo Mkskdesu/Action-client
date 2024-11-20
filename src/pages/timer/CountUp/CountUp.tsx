@@ -4,6 +4,9 @@ import { BsArrowCounterclockwise, BsCaretRightFill, BsPauseFill } from "solid-ic
 import { setTimerState, timerState } from "global/states/timerState";
 import { getTime, resetTimer, startTimer, stopTimer } from "@/features/timerbackend/countup";
 import { createEffect, createSignal, onMount, Show } from "solid-js";
+import SaveDialog from "pages/timer/saveDialog/saveDialog.tsx";
+import {setShowModal, showModal} from "pages/timer/state/modal.ts";
+import {Transition} from "solid-transition-group";
 
 
 export default () => {
@@ -31,6 +34,9 @@ export default () => {
         setTimerValue([min, sec, value]);
     }
 
+    
+
+
     return (
         <div class={style.countUp}>
 
@@ -52,8 +58,13 @@ export default () => {
                 <R8Button class={style.button} onClick={() => { setTimerState("paused"); resetTimer(); }}>
                     <BsArrowCounterclockwise />
                 </R8Button>
+                <R8Button class={style.button} onclick={() => {setShowModal(true)}}>
+                    学習記録に保存する
+                </R8Button>
             </div>
-
+            
+                    <SaveDialog/>
+            
         </div >
     )
 }

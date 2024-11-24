@@ -23,6 +23,9 @@ export default () => {
 
     const userIdUuid = uuidv4();
     const passwordUuid = uuidv4();
+    
+    
+    
 
     function toggleShowPassword() {
         setShowPassword(p => !p);
@@ -30,6 +33,7 @@ export default () => {
     }
 
     onMount(() => {
+        
         autoLogin()
             .then(() => navigate("/~"))
             .catch(err => {

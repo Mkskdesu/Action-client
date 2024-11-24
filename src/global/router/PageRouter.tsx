@@ -6,6 +6,7 @@ import Notification from "global/components/notification/Notification";
 import Record from "pages/record/Record";
 import Register from "pages/register/Register";
 import Timer from "pages/timer/Timer";
+import Logout from "pages/logout/Logout.tsx";
 
 export default () => {
     return (
@@ -18,6 +19,7 @@ export default () => {
                 <Route path={"/record"} component={Record} />
                 <Route path={"/timer"} component={Timer} />
             </Route>
+            <Route path={"/logout"} component={Logout} />
         </>
     )
 }

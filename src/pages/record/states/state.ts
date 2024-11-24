@@ -3,7 +3,7 @@ import { createSignal } from "solid-js";
 import { createStore, reconcile } from "solid-js/store";
 
 
-const defaultRecord:recordDay = {
+export const defaultRecord:recordDay = {
     math: {
         time: 0,
         reflection: ""

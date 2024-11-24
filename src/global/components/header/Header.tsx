@@ -7,9 +7,13 @@ import style from "./Header.module.scss";
 import { pageTitle } from 'global/states/pageTitleState';
 import { setSideBarState } from 'global/states/sidebarState';
 import { setShowNotification } from 'global/states/notificationState';
+import defaultUser from "@/features/localStorage/defaults/user.ts";
 
 
 export default () => {
+
+    const storageData: typeof defaultUser = JSON.parse(localStorage.getItem("user")|| "{}");
+    
     return (
         <header class={style.heading}>
             <span class={style.title}>Action</span>
@@ -18,7 +22,7 @@ export default () => {
             </span>
             <div class={style.account}>
                 <AiOutlineUser />
-                USER
+                { storageData.name ||  "USER"}
             </div>
             <IconButton class={style.icon} onClick={()=> setShowNotification(true)}>
                 <BsBell />

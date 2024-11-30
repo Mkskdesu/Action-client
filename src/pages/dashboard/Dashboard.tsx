@@ -50,12 +50,13 @@ export default () => {
     return (
         <div class={style.dashboard}>
             <div class={style.loginCounter}>
-                <TypeWriter content={`現在 ${loginStreak()[0]} 日連続ログイン中! `} />
+                <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `} />
                 <TypeWriter content={loginCounterText()} />
             </div>
             <div class={style.grassCalendar}>
                 <div class={style.title}>
                     <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2>
+                    <div class={style.spacer}></div>
                     <IconTextButton class={style.button} icon={<CgChevronLeft/>}
                                     onClick={() => setMonthBase(p => p.subtract(1, "month"))}>
                         前月
@@ -71,6 +72,7 @@ export default () => {
             <div class={style.weekCalendar}>
                 <div class={style.title}>
                     <h2>今週の概要 - 第 {weekBase().week()} 週</h2>
+                    <div class={style.spacer}></div>
                     <IconTextButton class={style.button} icon={<CgChevronLeft/>}
                                     onClick={() => setWeekBase(p => p.subtract(1, "week"))}>
                         先週

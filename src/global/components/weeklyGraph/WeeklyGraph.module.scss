@@ -4,9 +4,13 @@
     height: 24px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     column-gap: 16px;
     justify-content: center;
     .legend{
+        @media screen and (max-width: 640px){
+            font-size: 0.8em;
+        }
         display: grid;
         grid-template-columns: 16px auto;
         align-items: center;

@@ -1,4 +1,4 @@
-import { Accessor, createEffect, For, JSX, on, onMount } from "solid-js"
+import {Accessor, createEffect, For, JSX, on, onCleanup, onMount} from "solid-js"
 
 import dayjs, { Dayjs } from "dayjs";
 import createWeekCalendar from "global/utils/createWeekCalendar";
@@ -6,6 +6,7 @@ import recordExists from "@/features/RecordExists/recordExists";
 import "@/lib/googlechart";
 
 import style from "./WeeklyGraph.module.scss";
+import aiSession from "@/features/aiSession/aiSession.ts";
 
 
 interface weeklyGraphProps {
@@ -20,10 +21,17 @@ export default (props: weeklyGraphProps) => {
 
     const legends = [["english", "英語"], ["math", "数学"], ["japanese", "国語"], ["social", "社会科"], ["science", "理科"], ["other", "その他"]]
 
+    const ai = new aiSession({mode:"server"});
+
     onMount(() => {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(init);
+        window.addEventListener("resize", init);
     });
+    
+    onCleanup(()=>{
+        window.removeEventListener("resize", init);
+    })
 
     createEffect(on([props.weekBase, props.graphUnit], ([w, g]) => {
         if (!graphAvaliable) return;

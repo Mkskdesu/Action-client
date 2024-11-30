@@ -1,6 +1,6 @@
 ﻿export default {
     loginStreak:{
-        streak:0,
+        streak:1,
         lastLogin: 0,
     }
 }

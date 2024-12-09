@@ -7,6 +7,7 @@ import R8Button from "global/components/button/r8Button/R8Button";
 import { AiOutlineLoading3Quarters } from "solid-icons/ai";
 import { setUserData, userData } from "../states/formState";
 import registerUser from "@/features/register/registerUser";
+import {useNavigate} from "@solidjs/router";
 
 
 interface userDetailsFormProps {
@@ -19,6 +20,8 @@ export default (props: userDetailsFormProps) => {
     const [iconType, setIconType] = createSignal("url");
     const [disabled, setDisabled] = createSignal(false);
     const [errorMessage, setErrorMessage] = createSignal("");
+    
+    const navigate = useNavigate();
 
     const displayNameUuid = uuidv4();
     const statusUuid = uuidv4();
@@ -34,7 +37,10 @@ export default (props: userDetailsFormProps) => {
             return;
         }
         setUserData({ username, status });
-        registerUser(userData);
+        registerUser(userData).then(() => navigate("/~"))
+            .catch((e: [string, number]) => {
+                
+            })
     }
 
     return (

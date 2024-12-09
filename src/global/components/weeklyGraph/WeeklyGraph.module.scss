@@ -1,11 +1,10 @@
 @import "global/styles/mixin.scss";
 
 .legends{
-    height: 24px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    column-gap: 16px;
+    gap: 4px 16px;
     justify-content: center;
     .legend{
         @media screen and (max-width: 640px){

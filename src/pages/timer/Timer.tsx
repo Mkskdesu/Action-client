@@ -5,6 +5,7 @@ import R8Button from "global/components/button/r8Button/R8Button";
 import { setBottomBarState } from "global/states/bottomBarState";
 import { setTimerType, timerType } from "global/states/timerState";
 import CountUp from "./CountUp/CountUp";
+import CountDown from "pages/timer/CountDown/CountDown.tsx";
 
 
 export default () => {
@@ -43,6 +44,9 @@ export default () => {
                 <Switch fallback={<></>}>
                     <Match when={timerType() == "countup"}>
                         <CountUp />
+                    </Match>
+                    <Match when={timerType() == "countdown"}>
+                        <CountDown/>
                     </Match>
                 </Switch>
             </div>

@@ -1,0 +1,26 @@
+@import "global/styles/mixin.scss";
+
+.countdown{
+    
+    .input{
+        font-size: 64px;
+        input[type="number"]{
+            all:unset;
+            width: 1em;
+            text-align: center;
+            background-color: $inputBackgroundPrimary;
+            border-radius: 8px;
+            border: 2px solid $sectionBorder;
+            &:focus-within,&:focus-visible{
+                box-shadow: 0 0 8px 4px $borderColor;
+                outline: none;
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                appearance: none;
+                margin: 0;
+            }
+        }
+    }
+}

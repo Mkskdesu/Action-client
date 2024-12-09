@@ -1,6 +1,6 @@
 @import "global/styles/mixin.scss";
 
-.modal {
+.resetModal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +20,7 @@
     }
 
     .inner {
-        min-height: 96px;
+        min-height: 200px;
         height: 20%;
         min-width: 480px;
         width: 50%;

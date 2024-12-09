@@ -45,8 +45,6 @@ export default () => {
         console.log(result);
     }
 
-
-
     return (
         <div class={style.dashboard}>
             <div class={style.loginCounter}>

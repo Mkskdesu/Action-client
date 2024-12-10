@@ -23,7 +23,7 @@ export default (userData: defaultDataType) => {
             method: "POST",
             headers: {
                 "Origin": location.hostname,
-                "Content-type": "application/json"
+                "content-type": "application/json"
             },
             body: JSON.stringify({...userData,deviceid:storageData.device.id})
         }).then(judgeResult)

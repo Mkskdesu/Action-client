@@ -11,7 +11,7 @@ import {Transition} from "solid-transition-group";
 
 export default () => {
 
-    const [timerValue, setTimerValue] = createSignal<Array<number>>([0, 0, 0]);
+    const [timerValue, setTimerValue] = createSignal<Array<number>>([0,0, 0, 0]);
 
     let timerInterval: number;
 
@@ -27,11 +27,13 @@ export default () => {
 
     function parseTimer() {
         let value = getTime();
+        let hour = Math.floor(value / 3600000);
+        value -= 3600000 * hour;
         let min = Math.floor(value / 60000);
         value -= 60000 * min;
         let sec = Math.floor(value / 1000);
         value -= 1000 * sec;
-        setTimerValue([min, sec, value]);
+        setTimerValue([hour,min, sec, value]);
     }
 
     
@@ -41,7 +43,9 @@ export default () => {
         <div class={style.countUp}>
 
             <div class={style.clock}>
-                {timerValue()[0].toString().padStart(2, "0")} : {timerValue()[1].toString().padStart(2, "0")} : {timerValue()[2].toString().padStart(3, "0")}
+                <Show when={timerValue()[0]}>
+                    {timerValue()[0].toString().padStart(2, "0")} :
+                </Show> {timerValue()[1].toString().padStart(2, "0")} : {timerValue()[2].toString().padStart(2, "0")} : {timerValue()[3].toString().padStart(3, "0")}
             </div>
 
             <div class={style.buttons}>

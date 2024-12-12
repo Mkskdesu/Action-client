@@ -2,6 +2,13 @@
 
 .login {}
 
+.notification {
+    background-image: linear-gradient(to bottom, $sectionBackgroundPrimary, $sectionBackgroundSecondary);
+    border: 2px solid $sectionBorder;
+    border-radius: 12px;
+    padding: 8px;
+}
+
 .heading {
     font-family: "Kamaboko";
     font-size: 2em;

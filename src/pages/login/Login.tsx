@@ -55,8 +55,8 @@ export default () => {
         }
         login(username, password)
             .then(() => navigate("/~"))
-            .catch((e: [string, number]) => {
-                setErrorMessage(`E${e[1]}: ${e[0]}`)
+            .catch((e:string) => {
+                setErrorMessage(e.toString());
                 setDisabled(false);
             })
     }
@@ -70,6 +70,10 @@ export default () => {
             <div class={style.wrapper}>
                 <div class={style.content}>
                     <div class={style.loginForm}>
+                        <div class={style.notification}>
+                            ログインしづらい, またはログインできない場合は 
+                            <A href={"/~"}>ログインスキップ</A>をお試しください.
+                        </div>
                         <h2>ログイン</h2>
                         <div class={style.inputSection}>
                             <label for={`login-${userIdUuid}`}>ユーザーID</label>

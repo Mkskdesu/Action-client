@@ -56,6 +56,7 @@ export default () => {
         login(username, password)
             .then(() => navigate("/~"))
             .catch((e:string) => {
+                console.error(e);
                 setErrorMessage(e.toString());
                 setDisabled(false);
             })

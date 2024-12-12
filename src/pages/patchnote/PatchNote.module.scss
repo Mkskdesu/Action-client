@@ -1,0 +1,15 @@
+﻿@import "global/styles/mixin";
+
+.patchnote{
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    .renderArea{
+        max-width: 720px;
+        min-height: calc(100vh - 176px);
+        background-image: linear-gradient(to bottom, $sectionBackgroundPrimary, $sectionBackgroundSecondary);
+        border: 2px solid $sectionBorder;
+        border-radius: 12px;
+        padding: 8px;
+    }
+}

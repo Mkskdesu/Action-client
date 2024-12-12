@@ -1,0 +1,1 @@
+﻿export default "https://raw.githubusercontent.com/Mkskdesu/Action-client/refs/heads/main/patchnote.md";

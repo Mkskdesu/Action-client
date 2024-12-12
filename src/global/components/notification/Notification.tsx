@@ -36,7 +36,7 @@ export default () => {
                             <R8Button onClick={()=> setTab("normal")}>その他の通知</R8Button>
                         </div>
                         <div class={style.notificationArea}>
-                            
+                            通知はまだありません.
                         </div>
                     </div>
                 </div>

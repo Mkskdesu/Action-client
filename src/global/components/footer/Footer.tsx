@@ -22,7 +22,7 @@ export default () => {
                     <CgNotes />
                     <span>記録</span>
                 </button>
-                <button onClick={() => navigate("social")}>
+                <button onClick={() => navigate("social")} data-active={bottomBarState() == "social"}>
                     <BsPeople />
                     <span>ソーシャル</span>
                 </button>

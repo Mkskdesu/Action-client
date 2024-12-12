@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import getMonthData from "global/utils/getMonthData"
-import { For, JSX, on } from "solid-js";
+import {createSignal, For, JSX, on, Show} from "solid-js";
 import * as solid from "solid-js";
 
 import style from "./grassCalendar.module.scss";
@@ -8,6 +8,8 @@ import classificatoryTaxonomy from "global/utils/classificatoryTaxonomy";
 import getQuantile from "global/utils/getQuantile";
 import dayjs, { Dayjs } from "dayjs";
 import getRecords from "./getRecords";
+import React from "react";
+import sumArray from "global/utils/sumArray.ts";
 
 
 interface glassCalendarProps extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -19,41 +21,45 @@ export default (props: glassCalendarProps) => {
     //const [firstDay, monthLength] = getMonthData(props.year, props.month);
     //const calendarBase = dayjs().year(props.year).month(props.month)
     const [calendarData, setCalendarData] = solid.createSignal<Array<Array<number>>>([]);
+    const [total,setTotal] = createSignal(0);
+    let firstDay:number;
+    let records:Array<number>;
 
     solid.createEffect(on(props.monthBase, v => {
         renderCalendar(v);
     }));
 
     function renderCalendar(monthBase:Dayjs) {
-        const firstDay = monthBase.day();
+        firstDay = monthBase.day();
         const monthLength = monthBase.daysInMonth();
+        
         const weeks = Math.ceil((monthLength - (7 - firstDay)) / 7) + 1;
-        const records = getRecords(monthBase);
+        records = getRecords(monthBase);
         let data = [];
         const [min, q1, mid, q3, max] = getQuantile(records);
-        //console.log(min, q1, mid, q3, max);
+        console.log(min, q1, mid, q3, max)
 
-
+        let index = 0;
         for (let i = 0; i < weeks; i++) {
             data[i] = new Array(7);
             if (i == 0) {
                 for (let j = 0; j < 7 - firstDay; j++) {
-                    data[i][j + firstDay] = classificatoryTaxonomy(records[i], q1, mid, q3);
+                    data[i][j + firstDay] = classificatoryTaxonomy(records[j], q1, mid, q3);
+                    index++;
                 }
 
             } else {
                 for (let j = 0; j < 7; j++) {
-                    if ((7 * i - firstDay + j) > (monthLength - firstDay + 1)) continue;
+                    //if ((7 * i - firstDay + j) > (monthLength - firstDay + 1)) continue;
+                    if (index+1 > monthLength) continue;
                     data[i][j] = classificatoryTaxonomy(records[7 * i - firstDay + j], q1, mid, q3);
+                    index++;
                 }
             }
         }
         setCalendarData(data);
     }
-
-
-
-
+    
     return (
         <div {...props} class={clsx(props.class, style.calendar)}>
             <div class={style.days}>
@@ -62,26 +68,38 @@ export default (props: glassCalendarProps) => {
             </div>
             <For each={calendarData()}>
                 {
-                    week => (
+                    (week, i) => (
                         <div class={style.weekRow}>
                             <For each={week}>
                                 {
-                                    day =>
-                                        <div class={clsx(style.dayBlock)} data-color={day}></div>
+                                    (day, j) =>{
+                                        const dateIndex = i()==0?j()-firstDay:7*i()+j()-firstDay;
+                                        const time = records[dateIndex]
+                                        return(
+                                            <div class={clsx(style.dayBlock)} data-color={day}>
+                                                <Show when={dateIndex < props.monthBase().daysInMonth() && dateIndex>-1}>
+                                                    <div class={style.tooltip}>
+                                                        <span class={style.date}>{props.monthBase().month() + 1} / {dateIndex + 1}</span>
+                                                        <span class={style.time}>{dayjs.duration(time||0, "minute").format("HH:mm")}</span>
+                                                    </div>
+                                                </Show>
+                                            </div>
+                                        )
+                                    }
                                 }
                             </For>
                         </div>
                     )
                 }
             </For>
-            <hr class={style.belowCalendar} />
-            <div class={style.example}>
-                少
-                <div class={style.dayBlock} data-color={-1}></div>
-                <div class={style.dayBlock} data-color={0}></div>
-                <div class={style.dayBlock} data-color={1}></div>
-                <div class={style.dayBlock} data-color={2}></div>
-                <div class={style.dayBlock} data-color={3}></div>
+    <hr class={style.belowCalendar}/>
+    <div class={style.example}>
+        少
+        <div class={style.dayBlock} data-color={-1}></div>
+        <div class={style.dayBlock} data-color={0}></div>
+            <div class={style.dayBlock} data-color={1}></div>
+            <div class={style.dayBlock} data-color={2}></div>
+            <div class={style.dayBlock} data-color={3}></div>
                 多
             </div>
         </div>

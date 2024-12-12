@@ -1,0 +1,1 @@
+﻿export default (array:Array<number>) => array.reduce((a,b)=> a+b,0);

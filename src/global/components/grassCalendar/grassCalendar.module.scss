@@ -60,9 +60,17 @@
     height: 24px;
     width: 24px;
     border-radius: 4px;
+    position: relative;
+    &:hover{
+        .tooltip{
+            visibility: visible;
+            animation: fadeIn 0.15s ease forwards;
+        }
+    }
 
     &[data-color="-1"] {
         background-color: $glass0;
+        
     }
 
     &[data-color="0"] {
@@ -71,13 +79,42 @@
 
     &[data-color="1"] {
         background-color: $glass2;
+        .tooltip>.time{
+            color: $glass2;
+        }
     }
 
     &[data-color="2"] {
         background-color: $glass3;
+        .tooltip>.time{
+            color: $glass3;
+        }
     }
 
     &[data-color="3"] {
         background-color: $glass4;
+        .tooltip>.time{
+            color: $glass4;
+        }
+    }
+    
+    .tooltip{
+        display: flex;
+        position: absolute;
+        visibility: hidden;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 28px;
+        height: 40px;
+        min-width: 40px;
+        padding: 4px;
+        border-radius: 4px;
+        z-index: 10;
+        background-color: $overlayColor;
+        box-shadow: 0 0 4px 2px $glass4;
+        .date{
+            font-size: 0.8em;
+        }
     }
 }

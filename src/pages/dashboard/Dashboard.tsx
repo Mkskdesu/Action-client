@@ -1,4 +1,4 @@
-import {createEffect, createSignal, on, onMount, Show} from "solid-js";
+import {createEffect, createSignal, on, onCleanup, onMount, Show} from "solid-js";
 import { CgChevronLeft, CgChevronRight } from "solid-icons/cg";
 import clsx from "clsx";
 import dayjs from "dayjs";
@@ -24,6 +24,10 @@ import {A} from "@solidjs/router";
 import getRecords from "global/components/grassCalendar/getRecords.ts";
 import sumArray from "global/utils/sumArray.ts";
 import grassCalendarPrompt from "pages/dashboard/aiPrompt/grassCalendarPrompt.ts";
+import R8Button from "global/components/button/r8Button/R8Button.tsx";
+import {BsX} from "solid-icons/bs";
+
+import version from "assets/version?raw";
 
 export default () => {
 
@@ -35,6 +39,8 @@ export default () => {
     const [graphUnit, setGraphUnit] = createSignal(false);
     const [loginCounterText,setLoginCounterText] = createSignal("");
     const [grassCalendarText,setGrassCalendarText] = createSignal("");
+    const [showInstallButton,setShowInstallButton] = createSignal(false);
+    let installPromptData;
 
     const ai = new aiSession({mode:"server"});
     let streak;
@@ -44,7 +50,8 @@ export default () => {
         setBottomBarState("home");
         ai.createSession();
         generateStreakText();
-        generateGrassCalendarText()
+        generateGrassCalendarText();
+        window.addEventListener("beforeinstallprompt",handleBeforeInstall)
     });
     
     createEffect(on(monthBase,()=>{
@@ -52,7 +59,31 @@ export default () => {
         const hour = Math.floor(time/60);
         time -= hour*60;
         setMonthTotal([hour,time]);
-    }))
+    }));
+    
+    onCleanup(()=>{
+        window.removeEventListener("beforeinstallprompt",handleBeforeInstall);
+    })
+    
+    function handleBeforeInstall(e:WindowEventMap[keyof WindowEventMap]) {
+        const bannerValue = localStorage.getItem("pwaInstallBanner");
+        if (bannerValue == "no") return;
+        setShowInstallButton(true);
+        installPromptData = e;
+    }
+    
+    function installPWA(){
+        if(!installPromptData) {
+            alert("すでにインストールされているか, インストールできません.");
+            return;
+        }
+        installPromptData.prompt();
+    }
+    
+    function rejectInstall(){
+        setShowInstallButton(false);
+        localStorage.setItem("pwaInstallBanner", "no")
+    }
     
     function generateStreakText() {
         const result = ai.textPrompt(loginStreakPrompt.sysPrompt,loginStreakPrompt.userPrompt + JSON.stringify({streak:loginStreak()[0], diff:loginStreak()[1], lastLogin: loginStreak()[2]}))
@@ -70,13 +101,23 @@ export default () => {
 
     return (
         <div class={style.dashboard}>
+            <Show when={showInstallButton()}>
+                <div class={clsx(style.notification, style.pwabanner)}>
+                    <img src="/icon_192.png" height={32} alt=""/>
+                    <span style={{"font-family": "Kamaboko"}}>ACTION </span>
+                    アプリ版
+                    <div>{/*spacer*/}</div>
+                    <R8Button onClick={installPWA}>インストール</R8Button>
+                    <R8Button class={style.x} onClick={rejectInstall}><BsX/></R8Button>
+                </div>
+            </Show>
             <div class={style.notification}>
-                [お知らせ] 12月12日 23:00更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.0.1.1
+                [お知らせ] 12月14日 22:20更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
                 アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
             </div>
             <div class={style.loginCounter}>
-                <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `} />
-                <TypeWriter content={loginCounterText()} />
+                <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `}/>
+                <TypeWriter content={loginCounterText()}/>
             </div>
             <div class={style.grassCalendar}>
                 <div class={style.title}>

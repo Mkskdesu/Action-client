@@ -3,6 +3,7 @@ import {onMount} from "solid-js";
 import {setPageTitle} from "global/states/pageTitleState.ts";
 import {setBottomBarState} from "global/states/bottomBarState.ts";
 import RecordPage from "pages/settings/recordPage/RecordPage.tsx";
+import TimerPage from "pages/settings/TimerPage/TimerPage.tsx";
 
 export default () =>{
     
@@ -13,6 +14,7 @@ export default () =>{
     return (
         <div class={style.settings}>
             <RecordPage/>
+            <TimerPage/>
         </div>
     )
 }

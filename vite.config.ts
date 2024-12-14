@@ -2,6 +2,7 @@ import {defineConfig, loadEnv} from 'vite';
 import solid from 'vite-plugin-solid';
 import devtools from "solid-devtools/vite";
 import { VitePluginRadar } from 'vite-plugin-radar'
+import {VitePWA} from "vite-plugin-pwa";
 
 
 
@@ -22,6 +23,12 @@ export default ({mode}:{mode:string})=>{
                 analytics: {
                     id: process.env.GTAG,
                 },
+            }),
+            VitePWA({
+                registerType: "autoUpdate",
+                devOptions:{enabled:true},
+                includeAssets:["apple-touch-icon.png","icon_192.png","icon_512.png","icon_maskable_192.png","icon_maskable_512.png"],
+                manifest:false
             })
         ],
         resolve: {

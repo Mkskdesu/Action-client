@@ -48,12 +48,12 @@
 
         .title {
             display: grid;
-            grid-template-columns: 1fr auto auto auto auto;
+            grid-template-columns: 1fr repeat(4, auto);
             column-gap: 16px;
             align-items: center;
             @media screen and (max-width: 600px) {
                 grid-template-rows: repeat(2, 1fr);
-                grid-template-columns: 1fr auto auto auto;
+                grid-template-columns: 1fr repeat(3, auto);
                 h2{
                     grid-row: 1/1;
                     grid-column: 1/3;
@@ -117,13 +117,13 @@
 
         .title {
             display: grid;
-            grid-template-columns: 1fr auto auto auto;
+            grid-template-columns: 1fr repeat(3, auto);
             column-gap: 16px;
             align-items: center;
             
             @media screen and (max-width: 640px) {
                 grid-template-rows: repeat(2, 1fr);
-                grid-template-columns: 1fr auto auto auto;
+                grid-template-columns: 1fr repeat(3, auto);
                 h2{
                     grid-row: 1/1;
                     grid-column: 1/-1;

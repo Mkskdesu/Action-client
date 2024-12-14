@@ -19,7 +19,7 @@ export default () => {
         { title: "記録", href: "/~/record" },
         { title: "ソーシャル", href: "/~/social" },
         { title: "タイマー", href: "/~/timer" },
-        { title: "設定", href: "/settings" },
+        { title: "設定", href: "/~/settings" },
         { title: "ログアウト", href: "/logout" },
     ]
 

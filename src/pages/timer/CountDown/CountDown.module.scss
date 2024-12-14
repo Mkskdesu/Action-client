@@ -4,6 +4,10 @@
     
     .input{
         font-size: 64px;
+        .normalText{
+            font-size: 1rem;
+            text-align: center;
+        }
         input[type="number"]{
             all:unset;
             width: 1em;
@@ -20,6 +24,42 @@
             &::-webkit-inner-spin-button {
                 appearance: none;
                 margin: 0;
+            }
+        }
+    }
+
+    .clock{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1/1;
+        font-size: 64px;
+        padding: 16px;
+        font-feature-settings: "tnum";
+        
+        
+        .circle{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 8px;
+            svg{
+                height: 100%;
+                width: 100%;
+                rotate: -90deg;
+                
+                circle{
+
+                    stroke-linecap: round;
+                    stroke-width: 0.5px;
+                    fill: transparent;
+                    stroke: $textColor;
+                    stroke-dashoffset: 0;
+                    stroke-dasharray: calc(32 * 3.14);
+                }
             }
         }
     }

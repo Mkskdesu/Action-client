@@ -36,7 +36,17 @@
         aspect-ratio: 1/1;
         font-size: 64px;
         padding: 16px;
-        font-feature-settings: "tnum";
+        
+        .number{
+            width: 1em;
+            text-align: center;
+            display: inline-block;
+        }
+        .colon{
+            width: 0.5em;
+            text-align: center;
+            display: inline-block;
+        }
         
         
         .circle{

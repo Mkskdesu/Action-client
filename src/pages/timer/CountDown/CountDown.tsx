@@ -98,8 +98,12 @@ export default () =>{
                 <Match when={mode() == "running"}>
                     <div class={style.clock}>
                         <Show when={timerValue()[0]}>
-                            {timerValue()[0].toString().padStart(2, "0")} :
-                        </Show> {timerValue()[1].toString().padStart(2, "0")} : {timerValue()[2].toString().padStart(2, "0")}
+                            <span class={style.number}>{timerValue()[0].toString().padStart(2, "0")}</span>
+                            <span class={style.colon}>:</span>
+                        </Show>
+                        <span class={style.number}>{timerValue()[1].toString().padStart(2, "0")}</span>
+                        <span class={style.colon}>:</span>
+                        <span class={style.number}>{timerValue()[2].toString().padStart(2, "0")}</span>
                         <div class={style.circle}>
                             <Circle ref={circleRef}/>
                         </div>

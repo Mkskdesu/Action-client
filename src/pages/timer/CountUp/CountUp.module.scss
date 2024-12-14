@@ -2,7 +2,17 @@
 
     .clock{
         font-size: 64px;
-        font-feature-settings: "tnum";
+
+        .number{
+            width: 1em;
+            text-align: center;
+            display: inline-block;
+        }
+        .colon{
+            width: 0.5em;
+            text-align: center;
+            display: inline-block;
+        }
     }
 
     .buttons {

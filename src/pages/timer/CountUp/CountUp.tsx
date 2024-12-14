@@ -47,8 +47,14 @@ export default () => {
 
             <div class={style.clock}>
                 <Show when={timerValue()[0]}>
-                    {timerValue()[0].toString().padStart(2, "0")} :
-                </Show> {timerValue()[1].toString().padStart(2, "0")} : {timerValue()[2].toString().padStart(2, "0")} : {timerValue()[3].toFixed(0).toString().padStart(3, "0")}
+                    <span class={style.number}>{timerValue()[0].toString().padStart(2, "0")}</span>
+                    <span class={style.colon}>:</span>
+                </Show>
+                <span class={style.number}>{timerValue()[1].toString().padStart(2, "0")}</span>
+                <span class={style.colon}>:</span>
+                <span class={style.number}>{timerValue()[2].toString().padStart(2, "0")}</span>
+                <span class={style.colon}>:</span>
+                <span class={style.number} style={{width:"1.5em"}}>{timerValue()[3].toFixed(0).toString().padStart(3, "0")}</span>
             </div>
 
             <div class={style.buttons}>

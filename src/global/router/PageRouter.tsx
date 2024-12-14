@@ -9,6 +9,7 @@ import Timer from "pages/timer/Timer";
 import Logout from "pages/logout/Logout.tsx";
 import Social from "pages/social/Social.tsx";
 import PatchNote from "pages/patchnote/PatchNote.tsx";
+import Settings from "pages/settings/Settings.tsx";
 
 export default () => {
     return (
@@ -22,6 +23,7 @@ export default () => {
                 <Route path={"/timer"} component={Timer} />
                 <Route path={"/social"} component={Social}/>
                 <Route path={"/patchnote"} component={PatchNote} />
+                <Route path={"/settings"} component={Settings} />
             </Route>
             <Route path={"/logout"} component={Logout} />
         </>

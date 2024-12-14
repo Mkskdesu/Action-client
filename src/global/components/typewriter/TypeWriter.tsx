@@ -17,7 +17,7 @@ export default (props:{content:string,interval?:number}) =>{
             }
             setDisplay(d=>d+props.content[index]);
             index++;
-        },interval||50)
+        },props.interval||50)
     });
     
     onCleanup(()=>{

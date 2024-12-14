@@ -8,7 +8,6 @@ import classificatoryTaxonomy from "global/utils/classificatoryTaxonomy";
 import getQuantile from "global/utils/getQuantile";
 import dayjs, { Dayjs } from "dayjs";
 import getRecords from "./getRecords";
-import React from "react";
 import sumArray from "global/utils/sumArray.ts";
 
 

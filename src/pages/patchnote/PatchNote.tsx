@@ -34,7 +34,11 @@ export default () => {
 
     return (
         <div class={style.patchnote}>
-            <div class={style.renderArea} ref={renderAreaRef}/>
+            <div class={style.renderArea} ref={renderAreaRef}>
+                <p>
+                    読み込み中...
+                </p>
+            </div>
         </div>
     )
 }

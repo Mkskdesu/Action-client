@@ -6,6 +6,7 @@
     justify-content: center;
     .renderArea{
         max-width: 720px;
+        width: 100%;
         min-height: calc(100vh - 176px);
         background-image: linear-gradient(to bottom, $sectionBackgroundPrimary, $sectionBackgroundSecondary);
         border: 2px solid $sectionBorder;

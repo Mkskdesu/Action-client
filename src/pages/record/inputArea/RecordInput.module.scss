@@ -12,6 +12,7 @@
     flex-direction: column;
     row-gap: 8px;
     transition: 0.2s;
+    
 
     &:focus-within,&:focus-visible{
         box-shadow: 0 0 4px 2px $borderColor;
@@ -50,16 +51,22 @@
     }
 
 
-    .timeInput {
+    .timeDirectInput {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         column-gap: 16px;
 
         .input {
             min-width: 72px
         }
+        
+        .selector{
+            min-width: 48px;
+        }
     }
+    
 
     .reflection {
         appearance: none;

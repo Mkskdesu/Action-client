@@ -2,9 +2,11 @@ import subjectMap from "assets/subjectMap.json";
 
 import style from "./RecordInput.module.scss";
 import NumberInput from "global/components/input/numberinput/NumberInput";
-import { createEffect, createSignal, onMount, Show, untrack } from "solid-js";
+import {createEffect, createSignal, Match, onMount, Show, Switch, untrack} from "solid-js";
 import { record, recordDate, setRecord } from "../states/state";
 import { unwrap } from "solid-js/store";
+import NormalSelectBox from "global/components/selectbox/normalSelectBox/NormalSelectBox.tsx";
+import {hourSelector, minuteSelector} from "global/constants/recordInputSelector.ts";
 
 
 interface recordInputProps {
@@ -24,7 +26,9 @@ export default (props: recordInputProps) => {
     const initialData = unwrap(record)[props.subject];
     const initialHour = Math.floor(initialData.time / 60);
     const initialMinute = initialData.time - (initialHour * 60);
-
+    
+    const inputType = JSON.parse(localStorage.getItem("config")||'{"record":{"inputType":"direct"}').record.inputType;
+    
     createEffect(() => {
         const time = Math.min(Math.max(0, 60 * hour() + minute()), 1440)
         setRecord(props.subject, { time });
@@ -60,12 +64,21 @@ export default (props: recordInputProps) => {
         <div class={style.inputArea} tabIndex={0}>
             <h3 class={style.title} data-subject={props.subject}>{subjectMap[props.subject]}</h3>
             <span>学習時間</span>
-            <div class={style.timeInput}>
-                <NumberInput min={0} max={23} step={1} class={style.input} value={initialHour} onUpdate={e => setHour(Number(e))} ref={hourRef} /> :
-                <NumberInput min={0} max={59} step={5} class={style.input} value={initialMinute} onUpdate={e => setMinute(Number(e))} ref={minuteRef} />
+            <div class={style.timeDirectInput}>
+                <Switch>
+                    <Match when={inputType == "direct"}>
+                            <NumberInput min={0} max={23} step={1} class={style.input} value={initialHour} onUpdate={e => setHour(Number(e))} ref={hourRef}/> :
+                            <NumberInput min={0} max={59} step={5} class={style.input} value={initialMinute} onUpdate={e => setMinute(Number(e))} ref={minuteRef}/>
+                    </Match>
+                    <Match when={inputType == "selector"}>
+                        <NormalSelectBox class={style.selector} contents={hourSelector} value={hourSelector[0]} onChange={v=>setHour(v)}/> :
+                        <NormalSelectBox class={style.selector} contents={minuteSelector} value={minuteSelector[0]} onChange={v=>setMinute(v)}/>
+                    </Match>
+                </Switch>
             </div>
             振り返り
-            <div class={style.reflection} contentEditable onInput={handleInput} onBlur={confirmText} textContent={initialData.reflection} ref={inputRef}></div>
+            <div class={style.reflection} contentEditable onInput={handleInput} onBlur={confirmText}
+                 textContent={initialData.reflection} ref={inputRef}></div>
             <Show when={!textLength()} fallback={
                 <div class={style.reflectionCounter}>
                     {textLength()}文字

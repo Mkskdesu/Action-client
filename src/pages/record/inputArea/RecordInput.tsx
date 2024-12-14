@@ -58,7 +58,7 @@ export default (props: recordInputProps) => {
 
     return (
         <div class={style.inputArea} tabIndex={0}>
-            <h3>{subjectMap[props.subject]}</h3>
+            <h3 class={style.title} data-subject={props.subject}>{subjectMap[props.subject]}</h3>
             <span>学習時間</span>
             <div class={style.timeInput}>
                 <NumberInput min={0} max={23} step={1} class={style.input} value={initialHour} onUpdate={e => setHour(Number(e))} ref={hourRef} /> :

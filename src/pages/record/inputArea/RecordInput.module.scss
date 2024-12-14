@@ -17,6 +17,37 @@
         box-shadow: 0 0 4px 2px $borderColor;
         outline: none;
     }
+    
+    .title{
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+        }
+        
+        &[data-subject="english"]::after{
+            background-image: linear-gradient(to right, $english, transparent);
+        }
+        &[data-subject="math"]::after{
+            background-image: linear-gradient(to right, $math, transparent);
+        }
+        &[data-subject="japanese"]::after{
+            background-image: linear-gradient(to right, $japanese, transparent);
+        }
+        &[data-subject="social"]::after{
+            background-image: linear-gradient(to right, $social, transparent);
+        }
+        &[data-subject="science"]::after{
+            background-image: linear-gradient(to right, $science, transparent);
+        }
+        &[data-subject="other"]::after{
+            background-image: linear-gradient(to right, $other, transparent);
+        }
+    }
 
 
     .timeInput {

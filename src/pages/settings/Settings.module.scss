@@ -1,0 +1,26 @@
+﻿@import "global/styles/mixin";
+
+.settings {
+    padding: 8px;
+    
+    .section{
+        background-image: linear-gradient(to bottom, $sectionBackgroundPrimary, $sectionBackgroundSecondary);
+        border: 2px solid $sectionBorder;
+        border-radius: 12px;
+        padding: 8px;
+    }
+    
+    .content{
+        display: grid;
+        grid-template-rows: auto auto;
+        p{
+            font-size: 0.9em;
+            color: $grayText;
+        }
+    }
+    .input{
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+    }
+}

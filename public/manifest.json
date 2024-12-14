@@ -1,0 +1,41 @@
+﻿{
+    "name": "ACTION",
+    "shortName": "ACTION",
+    "description": "AIとともに,新たな学習スタイルを。",
+    "theme_color": "#11151F",
+    "categories": ["education","productivity","utilities"],
+    "display": "standalone",
+    "start_url": "/",
+    
+    "icons": [
+        {
+            "src": "/icon_192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon_maskable_192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/icon_maskable_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

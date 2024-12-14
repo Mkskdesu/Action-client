@@ -81,6 +81,13 @@
         animation: hideSelector 0.2s ease forwards;
         z-index: 99;
 
+        &::-webkit-scrollbar-thumb{
+            width: 4px;
+            height: 2px;
+            background-color: $accentColor;
+            border-radius: 4px;
+        }
+
 
         .options {
             all: unset;
@@ -128,3 +135,4 @@
 
 
 }
+

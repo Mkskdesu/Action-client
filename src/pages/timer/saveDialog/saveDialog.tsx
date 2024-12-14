@@ -11,7 +11,7 @@ import subjectMap from "assets/subjectMap.json";
 import recordExists from "@/features/RecordExists/recordExists.ts";
 import dayjs from "dayjs";
 import deepmerge from "deepmerge";
-import {getTime} from "@/features/timerbackend/countup.ts";
+import {getCountUpTime} from "@/features/timerbackend/countup.ts";
 import {cloneDeep} from "lodash";
 
 
@@ -60,12 +60,12 @@ export default () =>{
         if(recordExists(date)) {
             const record = JSON.parse(localStorage.getItem("record") || "{}");
             const data = record?.[`y${date?.year()}`]?.[`m${date?.month()}`]?.[`d${date?.date()}`];
-            if (override) data[selectedSubject()].time = Math.floor(getTime() / 60000);
-            else data[selectedSubject()].time += Math.floor(getTime() / 60000);
+            if (override) data[selectedSubject()].time = Math.floor(getCountUpTime() / 60000);
+            else data[selectedSubject()].time += Math.floor(getCountUpTime() / 60000);
             localStorage.setItem("record", JSON.stringify(record));
         }else{
             const record = cloneDeep(defaultRecord);
-            record[selectedSubject()] = getTime() / 60000;
+            record[selectedSubject()] = getCountUpTime() / 60000;
             const saved = JSON.parse(localStorage.getItem("record") || "{}");
             const data: { [key: string]: { [key: string]: { [key: string]: object } } } = {};
             data[`y${date.year()}`] = {};

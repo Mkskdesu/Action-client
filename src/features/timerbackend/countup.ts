@@ -1,27 +1,32 @@
 const timerValue = {
     time: 0,
     intervalId: 0,
+    lastUpdate: 0,
 }
 
-function startTimer() {
+function startCountUpTimer() {
+    timerValue.lastUpdate = performance.now();
     timerValue.intervalId = setInterval(() => {
-        timerValue.time += 100;
+        const diff = performance.now() - timerValue.lastUpdate;
+        timerValue.time += diff;
+        timerValue.lastUpdate = performance.now();
     }, 100);
+    
 }
 
-function stopTimer() {
+function stopCountUpTimer() {
     clearInterval(timerValue.intervalId);
 }
 
-function resetTimer() {
-    stopTimer();
+function resetCountUpTimer() {
+    stopCountUpTimer();
     timerValue.time = 0;
     timerValue.intervalId = 0;
 }
 
-function getTime() {
+function getCountUpTime() {
     return timerValue.time;
 }
 
 
-export { startTimer, stopTimer, resetTimer, getTime };
+export { startCountUpTimer, stopCountUpTimer, resetCountUpTimer, getCountUpTime };

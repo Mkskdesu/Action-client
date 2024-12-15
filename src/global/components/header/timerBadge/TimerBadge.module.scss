@@ -4,6 +4,9 @@
     justify-content: center;
     column-gap: 8px;
     grid-column: 5/5;
+    @media screen and (max-width:480px) {
+        grid-column: 4/4;
+    }
     
     svg {
         animation: iconAnim 1s ease forwards;

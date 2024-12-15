@@ -4,13 +4,19 @@
     display: grid;
     padding: 0 8px;
     grid-template-columns: auto 1fr auto 64px 64px;
+    grid-template-rows: 1fr;
     align-items: center;
     height: 64px;
     user-select: none;
     background-image: radial-gradient(ellipse at top, $headerBackground, $pageBackground);
+    transition: 0.2s;
+    
+    &.enter{
+        grid-template-columns: auto 1fr auto 64px 72px 64px;
+    }
 
     @media screen and (max-width:480px) {
-        grid-template-columns: 1fr auto 64px 64px;
+        grid-template-columns: 1fr auto 64px minmax(64px,auto) 64px;
 
         .title {
             display: none;

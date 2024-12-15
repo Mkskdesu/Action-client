@@ -16,7 +16,10 @@
     }
 
     @media screen and (max-width:480px) {
-        grid-template-columns: 1fr auto 64px minmax(64px,auto) 64px;
+        grid-template-columns: 1fr auto 64px 64px;
+        &.enter{
+            grid-template-columns: 1fr auto 64px 72px 64px!important;
+        }
 
         .title {
             display: none;

@@ -3,9 +3,9 @@
 ## Ver.0.1.3
 
 ### patch_a
+**リストの修正**
 + 選択式リストがiOS端末またはSafariで正常に動作しない問題を修正しました.
 
----
 
 **記録画面のアップデート**
 + 教科カラーのアクセントを追加しました.
@@ -14,7 +14,8 @@
 
 ![https://raw.githubusercontent.com/Mkskdesu/Action-client/refs/heads/main/docs/img/pn_0_1_3_1.png](https://raw.githubusercontent.com/Mkskdesu/Action-client/refs/heads/main/docs/img/pn_0_1_3_1.png)
 
-**カウントダウンタイマーの実装**
+**タイマーのアップデート**
++ タイマーのアルゴリズムを変更しました.
 + カウントダウンを利用できるようになりました.
 
 **タイマーの不具合修正**

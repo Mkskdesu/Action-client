@@ -6,6 +6,7 @@ export function setData(data:loginResponse) {
         userStorageData.name = data.data.user.name;
         userStorageData.uuid = data.data.uuid;
         userStorageData.createdAt = data.data.user.createdAt;
+        userStorageData.sid = data.sid;
         localStorage.setItem("user", JSON.stringify(userStorageData));
     }
     location.pathname = "/";

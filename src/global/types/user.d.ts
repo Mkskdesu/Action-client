@@ -9,6 +9,7 @@ interface loginResponse {
         },
         user: apiUserData
     }
+    sid:string
 }
 
 interface apiUserData {

@@ -9,6 +9,8 @@ export default () =>{
     const navigate = useNavigate();
     
     onMount(()=>{
+        const userData = JSON.parse(localStorage.getItem("user")||"{})")
+        userData.sid = "";
         const url = new URL(baseUrl);
         url.pathname = "/users/logout";
         fetch(url).then(()=>navigate("/"));

@@ -12,5 +12,6 @@ export default {
     },
     name: "USER",
     icon: null,
-    createdAt: 0
+    createdAt: 0,
+    sid: "",
 }

@@ -25,7 +25,7 @@ export const autoLogin = () => {
                 "Origin": location.hostname,
                 "content-type": "application/json",
             },
-            body: JSON.stringify({ uuid: JSON.parse(localStorage.getItem("user") || "{}").uuid || "", deviceid:  storageData.device.id})
+            body: JSON.stringify({ uuid: storageData.uuid, deviceid:  storageData.device.id, sid:storageData.sid})
         }).then(judgeResult)
             .then(setData)
             .then(resolve)

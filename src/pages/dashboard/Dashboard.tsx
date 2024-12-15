@@ -112,7 +112,7 @@ export default () => {
                 </div>
             </Show>
             <div class={style.notification}>
-                [お知らせ] 12月15日 05:45更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
+                [お知らせ] 12月15日 22:40更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
                 アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
             </div>
             <div class={style.loginCounter}>

@@ -70,6 +70,8 @@ export default (props: weeklyGraphProps) => {
             ...weekData
         ]);
 
+        const maxValue = Math.max(...weekData.filter(e => typeof e == "number"))
+
         const options = {
             colors: ["#ed652f", "#2fb1ed", "#ed2f89", "#eddd2f", "#2fed43", "#2feddd"],
             isStacked: true,
@@ -77,7 +79,7 @@ export default (props: weeklyGraphProps) => {
             vAxis: {
                 title: `学習時間(${unit ? "分" : "時間"})`,
                 minValue: 0,
-                //maxValue: unit ? 1500 : 25
+                maxValue: maxValue / (unit ? 1 : 60) + (unit?30:1)
             },
             backgroundColor: "",
             tooltip: {

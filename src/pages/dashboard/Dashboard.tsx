@@ -133,9 +133,11 @@ export default () => {
                     </IconTextButton>
                     <button class={clsx(style.button, style.detailsbutton)}>詳細</button>
                 </div>
+                <Show when={grassCalendarText().length}>
                     <div class={style.textArea}>
                         <TypeWriter content={grassCalendarText()}/>
                     </div>
+                </Show>
                 <GrassCalendar {...{monthBase}} />
             </div>
             <div class={style.weekCalendar}>

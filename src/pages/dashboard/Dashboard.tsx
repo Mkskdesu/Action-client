@@ -25,9 +25,14 @@ import getRecords from "global/components/grassCalendar/getRecords.ts";
 import sumArray from "global/utils/sumArray.ts";
 import grassCalendarPrompt from "pages/dashboard/aiPrompt/grassCalendarPrompt.ts";
 import R8Button from "global/components/button/r8Button/R8Button.tsx";
-import {BsX} from "solid-icons/bs";
+import {BsCaretLeftFill, BsCaretRightFill, BsX} from "solid-icons/bs";
 
 import version from "assets/version?raw";
+import recordExists from "@/features/RecordExists/recordExists.ts";
+import {Slider, SliderButton, SliderProvider} from "solid-slider";
+import {autoplay} from "solid-slider/plugins/autoplay";
+import  {adaptiveHeight} from "solid-slider/plugins/adaptiveHeight";
+import 'solid-slider/slider.css';
 
 export default () => {
 
@@ -111,17 +116,35 @@ export default () => {
                     <R8Button class={style.x} onClick={rejectInstall}><BsX/></R8Button>
                 </div>
             </Show>
-            <div class={style.notification}>
-                [お知らせ] 12月15日 22:40更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
-                アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
-            </div>
-            <div class={style.loginCounter}>
-                <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `}/>
-                <TypeWriter content={loginCounterText()}/>
+            <div class={style.carousel}>
+            <SliderProvider>
+                <SliderButton prev class={style.button}>
+                    <BsCaretLeftFill/>
+                </SliderButton>
+            <Slider options={{loop: true}} plugins={[adaptiveHeight, autoplay(10000, {})]}>
+                <div class={clsx(style.loginCounter)}>
+                    <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `}/>
+                    <TypeWriter content={loginCounterText()}/>
+                </div>
+                <Show when={!recordExists(dayjs())}>
+                    <div class={clsx(style.notification)}>
+                        本日の学習記録が未入力です. 入力しませんか？
+                    </div>
+                </Show>
+                <div class={clsx(style.notification)}>
+                    [お知らせ] 12月15日 22:40更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
+                    アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
+                </div>
+            </Slider>
+                <SliderButton next class={style.button}>
+                    <BsCaretRightFill/>
+                </SliderButton>
+            </SliderProvider>
             </div>
             <div class={style.grassCalendar}>
                 <div class={style.title}>
-                    <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2> <p>総学習時間 : {monthTotal()[0]}時間{monthTotal()[1]}分</p>
+                    <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2> <p>総学習時間
+                    : {monthTotal()[0]}時間{monthTotal()[1]}分</p>
                     <div class={style.spacer}></div>
                     <IconTextButton class={style.button} icon={<CgChevronLeft/>}
                                     onClick={() => setMonthBase(p => p.subtract(1, "month"))}>

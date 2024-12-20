@@ -6,11 +6,38 @@
     flex-direction: column;
     row-gap: 16px;
     
+    .carousel{
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        column-gap: 16px;
+        
+        .button{
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            background-color: $inputBackgroundPrimary;
+            border-radius: 8px;
+            color: $textColor;
+            transition: 0.2s;
+            &:focus-visible,
+            &:hover {
+                box-shadow: 0 0 4px 2px $accentColor;
+            }
+
+            &:active {
+                filter: brightness(0.8);
+                scale: 0.98;
+            }
+        }
+    }
     .loginCounter,.notification{
         background-image: linear-gradient(to right, $sectionBackgroundPrimary, transparent);
         border: 2px solid $sectionBorder;
         border-radius: 12px;
         padding: 8px;
+        width: calc(100% - 16px);
     }
     .notification{
         position: relative;

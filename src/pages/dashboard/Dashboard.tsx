@@ -132,7 +132,7 @@ export default () => {
                     </div>
                 </Show>
                 <div class={clsx(style.notification)}>
-                    [お知らせ] 12月15日 22:40更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
+                    [お知らせ] 12月21日 02:50更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
                     アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
                 </div>
             </Slider>

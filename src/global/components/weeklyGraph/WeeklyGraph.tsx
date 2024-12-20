@@ -4,10 +4,12 @@ import dayjs, { Dayjs } from "dayjs";
 import createWeekCalendar from "global/utils/createWeekCalendar";
 import recordExists from "@/features/RecordExists/recordExists";
 import "@/lib/googlechart";
+import * as Highcharts from "highcharts";
 
 import style from "./WeeklyGraph.module.scss";
 import aiSession from "@/features/aiSession/aiSession.ts";
-
+import {Options} from "highcharts";
+//import "highcharts/css/themes/dark-unica.css";
 
 interface weeklyGraphProps {
     weekBase: Accessor<dayjs.Dayjs>
@@ -17,15 +19,17 @@ interface weeklyGraphProps {
 export default (props: weeklyGraphProps) => {
 
     let graphAreaRef: HTMLDivElement | undefined;
-    let graphAvaliable = false;
+    let graphAvaliable = true;
 
     const legends = [["english", "英語"], ["math", "数学"], ["japanese", "国語"], ["social", "社会科"], ["science", "理科"], ["other", "その他"]]
 
     const ai = new aiSession({mode:"server"});
+    
+    let chart:Highcharts.Chart;
 
     onMount(() => {
-        google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(init);
+        /*google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(init);*/
         window.addEventListener("resize", init);
     });
     
@@ -34,23 +38,21 @@ export default (props: weeklyGraphProps) => {
     })
 
     createEffect(on([props.weekBase, props.graphUnit], ([w, g]) => {
-        if (!graphAvaliable) return;
         createTable(w, g);
-    }
-    ));
+    }));
 
     function init() {
-        graphAvaliable = true;
         createTable(props.weekBase(), props.graphUnit());
     }
 
     function createTable(weekBase: Dayjs, unit: boolean) {
         const weekData = [];
+        const calendar = []
         const subjects = ["english", "math", "japanese", "social", "science", "other"]
         const weekCalendar = createWeekCalendar(weekBase);
         for (const day of weekCalendar) {
-            const data = [];
-            data.push(day.format("MM/DD"));
+            const data:Array<number> = [];
+            calendar.push(day.format("MM/DD"));
             if (!recordExists(day)) weekData.push([...data, 0, 0, 0, 0, 0, 0]);
             else {
                 const record = JSON.parse(localStorage.getItem("record") || "{}");
@@ -61,49 +63,61 @@ export default (props: weeklyGraphProps) => {
                 weekData.push(data);
             }
         }
-        drawChart(weekData, unit)
+        drawChart(weekData,calendar, unit)
     }
 
-    function drawChart(weekData: Array<Array<string | number>>, unit: boolean) {
-        const data = google.visualization.arrayToDataTable([
-            ['', "英語", "数学", "国語", "社会科", "理科", "その他"],
-            ...weekData
-        ]);
-
-        const options = {
-            colors: ["#ed652f", "#2fb1ed", "#ed2f89", "#eddd2f", "#2fed43", "#2feddd"],
-            isStacked: true,
-            legend: { position: "none" },
-            vAxis: {
-                title: `学習時間(${unit ? "分" : "時間"})`,
-                minValue: 0,
-                //maxValue: unit ? 1500 : 25
+    function drawChart(weekData: Array<Array<number>>,calendar:Array<string>, unit: boolean) {
+        if(chart){
+            chart.destroy();
+        }
+        const data:{name:string,data:Array<number>} = 
+             [
+                {name: "英語", data: weekData.map(day => day[0]),color:"#ED6B2FFF"},
+                {name: "数学", data: weekData.map(day => day[1]),color:"#2FB1EDFF"},
+                {name: "国語", data: weekData.map(day => day[2]),color:"#ED1BB1FF"},
+                {name: "社会", data: weekData.map(day => day[3]),color:"#EDDD2FFF"},
+                {name: "理科", data: weekData.map(day => day[4]),color:"#2FED43FF"},
+                {name: "その他", data: weekData.map(day => day[5]),color:"#2FEDDDFF"},
+            ]
+        
+        const cfg: Options = {
+            chart:{type:"column"},
+            title:{text:""},
+            
+            xAxis:{
+                categories: calendar.map<string>(day => day),
             },
-            backgroundColor: "",
-            tooltip: {
-                isHtml: true
+            yAxis:{
+                min: 0,
+                title: {text:`学習時間 (${unit?"分":"時間"})`},
+                stackLabels: {
+                    enabled: true
+                }
             },
-            animation: {
-                duration: 300,
-                easing: 'out',
+            legend:{
+                enabled:false,
             },
-
-        };
-
-        const chart = new google.visualization.ColumnChart(graphAreaRef!);
-
-        chart.draw(data, options);
+            tooltip:{
+                backgroundColor:"#373F5AFF",
+                headerFormat:" {category} ",
+                pointFormat:`{series.name}: {point.y}${unit?"分":"時間"}`,
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                }
+            },
+            series:data
+        }
+        chart = Highcharts.chart(graphAreaRef!,cfg);
+        
+        
     }
 
     return (
-        <>
-            <style>
-                {`text {
-                    fill: rgb(228,245,247) !important;
-                }`}
-            </style>
+        <div class={style.graph}>
             <div class={style.graphArea} ref={graphAreaRef}>
-
+                
             </div>
             <div class={style.legends}>
                 <For each={legends}>
@@ -115,7 +129,7 @@ export default (props: weeklyGraphProps) => {
                     }
                 </For>
             </div>
-        </>
+        </div>
 
     )
 }

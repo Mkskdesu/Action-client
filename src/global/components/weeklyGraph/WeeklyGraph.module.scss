@@ -1,5 +1,27 @@
 @import "global/styles/mixin.scss";
 
+
+.graph{
+    //height: 280px;
+    position: relative;
+}
+
+.graphArea{
+    /*height: calc(100% - 16px)!important;
+    width: 100%!important;*/
+    rect[class="highcharts-background"]{
+        fill: transparent;
+    }
+    
+    text{
+        font-family: $fontText;
+        fill: $textColor!important;
+        tspan{
+            display: none;
+        }
+    }
+}
+
 .legends{
     display: flex;
     flex-direction: row;

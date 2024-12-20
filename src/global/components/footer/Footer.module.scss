@@ -53,11 +53,25 @@
                     animation: bottomTipAnimation 0.2s ease forwards;
                 }
             }
+            &[data-notify="true"] {
+                ::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(calc(-50% + 10px), calc(-50% - 18px));
+                    background-color: $warn;
+                    height: 8px;
+                    width: 8px;
+                    border-radius: 4px;
+                }
+            }
 
             svg {
                 transition: 0.2s;
                 height: 24px;
                 width: 24px;
+                position: relative;
             }
 
             span {

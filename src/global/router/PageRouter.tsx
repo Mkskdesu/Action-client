@@ -10,6 +10,7 @@ import Logout from "pages/logout/Logout.tsx";
 import Social from "pages/social/Social.tsx";
 import PatchNote from "pages/patchnote/PatchNote.tsx";
 import Settings from "pages/settings/Settings.tsx";
+import ResetPassword from "pages/resetPassword/ResetPassword.tsx";
 
 export default () => {
     return (
@@ -26,6 +27,7 @@ export default () => {
                 <Route path={"/settings"} component={Settings} />
             </Route>
             <Route path={"/logout"} component={Logout} />
+            <Route path={"/resetpassword"} component={ResetPassword}/>
         </>
     )
 }

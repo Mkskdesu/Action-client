@@ -24,9 +24,6 @@ export default () => {
     const userIdUuid = uuidv4();
     const passwordUuid = uuidv4();
     
-    
-    
-
     function toggleShowPassword() {
         setShowPassword(p => !p);
         document.getElementById(`login-${passwordUuid}`)?.focus();
@@ -102,7 +99,7 @@ export default () => {
                     <hr />
                     <div class={style.support}>
                         <p>ログインできませんか？</p>
-                        <A href="">パスワードを忘れた</A> <br />
+                        <A href="/resetpassword">パスワードを忘れた</A> <br />
                         <A href="/register">新規登録</A>
                     </div>
                 </div>

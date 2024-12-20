@@ -8,15 +8,17 @@ export default () => {
     const diffValue = dayjs().diff(dayjs(previousData),"minute");
     console.log("diff:",dayDiff);
     if (dayDiff == 0) {
+        storageData.loginStreak.lastLogin = dayjs().valueOf();
+        localStorage.setItem("achievements", JSON.stringify(storageData));
         return [storageData.loginStreak.streak,diffValue,previousData];
     }else if (dayDiff == 1) {
         storageData.loginStreak.streak++;
-        storageData.loginStreak.lastLogin = dayjs().startOf("day").valueOf();
+        storageData.loginStreak.lastLogin = dayjs().valueOf();
         localStorage.setItem("achievements", JSON.stringify(storageData));
         return [storageData.loginStreak.streak,diffValue,previousData];
     }else{
         storageData.loginStreak.streak = 1;
-        storageData.loginStreak.lastLogin = dayjs().startOf("day").valueOf();
+        storageData.loginStreak.lastLogin = dayjs().valueOf();
         localStorage.setItem("achievements", JSON.stringify(storageData));
         return [storageData.loginStreak.streak,diffValue,previousData];
     }

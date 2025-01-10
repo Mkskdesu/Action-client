@@ -144,7 +144,7 @@ export default () => {
             <div class={style.grassCalendar}>
                 <div class={style.title}>
                     <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2> <p>総学習時間
-                    : {monthTotal()[0]}時間{monthTotal()[1]}分</p>
+                    : {monthTotal()[0]}時間{monthTotal()[1].toFixed(0)}分</p>
                     <div class={style.spacer}></div>
                     <IconTextButton class={style.button} icon={<CgChevronLeft/>}
                                     onClick={() => setMonthBase(p => p.subtract(1, "month"))}>

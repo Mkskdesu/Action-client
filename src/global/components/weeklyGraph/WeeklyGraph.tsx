@@ -58,7 +58,7 @@ export default (props: weeklyGraphProps) => {
                 const record = JSON.parse(localStorage.getItem("record") || "{}");
                 const recordData = record[`y${day?.year()}`][`m${day?.month()}`][`d${day?.date()}`];
                 for (const subject of subjects) {
-                    data.push(recordData[subject].time / (unit ? 1 : 60));
+                    data.push(unit? recordData[subject].time : Number((recordData[subject].time / 60).toFixed(2)))
                 }
                 weekData.push(data);
             }

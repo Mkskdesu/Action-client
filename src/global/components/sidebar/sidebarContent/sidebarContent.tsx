@@ -8,6 +8,7 @@ import R8Button from "global/components/button/r8Button/R8Button";
 import { For } from "solid-js";
 import { setSideBarState } from "global/states/sidebarState";
 import { useNavigate } from "@solidjs/router";
+import dayjs from "dayjs";
 
 
 export default () => {
@@ -45,7 +46,7 @@ export default () => {
                 </For>
             </div>
             <div class={style.footer}>
-                Copyright &#169; 2024 202-6-F-7 Action creating Team all rights reserved.
+                Copyright &#169; 2024 - {dayjs().year()} 202-6-F-7 Action creating Team all rights reserved.
             </div>
         </div>
     )

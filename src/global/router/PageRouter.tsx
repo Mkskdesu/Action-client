@@ -11,6 +11,7 @@ import Social from "pages/social/Social.tsx";
 import PatchNote from "pages/patchnote/PatchNote.tsx";
 import Settings from "pages/settings/Settings.tsx";
 import ResetPassword from "pages/resetPassword/ResetPassword.tsx";
+import Questionnaire from "pages/questionnaire/Questionnaire.tsx";
 
 export default () => {
     return (
@@ -25,6 +26,7 @@ export default () => {
                 <Route path={"/social"} component={Social}/>
                 <Route path={"/patchnote"} component={PatchNote} />
                 <Route path={"/settings"} component={Settings} />
+                <Route path={"/questionnaire"} component={Questionnaire} />
             </Route>
             <Route path={"/logout"} component={Logout} />
             <Route path={"/resetpassword"} component={ResetPassword}/>

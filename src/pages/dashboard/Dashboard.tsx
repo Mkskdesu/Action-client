@@ -1,10 +1,10 @@
 import {createEffect, createSignal, on, onCleanup, onMount, Show} from "solid-js";
-import { CgChevronLeft, CgChevronRight } from "solid-icons/cg";
+import {CgChevronLeft, CgChevronRight} from "solid-icons/cg";
 import clsx from "clsx";
 import dayjs from "dayjs";
 
-import { setBottomBarState } from "global/states/bottomBarState";
-import { setPageTitle } from "global/states/pageTitleState";
+import {setBottomBarState} from "global/states/bottomBarState";
+import {setPageTitle} from "global/states/pageTitleState";
 import IconButton from "global/components/button/iconButton/IconButton";
 import IconTextButton from "global/components/button/iconTextButton/IconTextButton";
 import GrassCalendar from "global/components/grassCalendar/grassCalendar";
@@ -31,7 +31,7 @@ import version from "assets/version?raw";
 import recordExists from "@/features/RecordExists/recordExists.ts";
 import {Slider, SliderButton, SliderProvider} from "solid-slider";
 import {autoplay} from "solid-slider/plugins/autoplay";
-import  {adaptiveHeight} from "solid-slider/plugins/adaptiveHeight";
+import {adaptiveHeight} from "solid-slider/plugins/adaptiveHeight";
 import 'solid-slider/slider.css';
 
 export default () => {
@@ -40,14 +40,14 @@ export default () => {
 
     const [weekBase, setWeekBase] = createSignal(dayjs().startOf("week"));
     const [monthBase, setMonthBase] = createSignal(dayjs().startOf("month"));
-    const [monthTotal,setMonthTotal] = createSignal([0,0]);
+    const [monthTotal, setMonthTotal] = createSignal([0, 0]);
     const [graphUnit, setGraphUnit] = createSignal(false);
-    const [loginCounterText,setLoginCounterText] = createSignal("");
-    const [grassCalendarText,setGrassCalendarText] = createSignal("");
-    const [showInstallButton,setShowInstallButton] = createSignal(false);
+    const [loginCounterText, setLoginCounterText] = createSignal("");
+    const [grassCalendarText, setGrassCalendarText] = createSignal("");
+    const [showInstallButton, setShowInstallButton] = createSignal(false);
     let installPromptData;
 
-    const ai = new aiSession({mode:"server"});
+    const ai = new aiSession({mode: "server"});
     let streak;
 
     onMount(() => {
@@ -56,51 +56,59 @@ export default () => {
         ai.createSession();
         generateStreakText();
         generateGrassCalendarText();
-        window.addEventListener("beforeinstallprompt",handleBeforeInstall)
+        window.addEventListener("beforeinstallprompt", handleBeforeInstall)
     });
-    
-    createEffect(on(monthBase,()=>{
+
+    createEffect(on(monthBase, () => {
         let time = getTotalMonthTime();
-        const hour = Math.floor(time/60);
-        time -= hour*60;
-        setMonthTotal([hour,time]);
+        const hour = Math.floor(time / 60);
+        time -= hour * 60;
+        setMonthTotal([hour, time]);
     }));
-    
-    onCleanup(()=>{
-        window.removeEventListener("beforeinstallprompt",handleBeforeInstall);
+
+    onCleanup(() => {
+        window.removeEventListener("beforeinstallprompt", handleBeforeInstall);
     })
-    
-    function handleBeforeInstall(e:WindowEventMap[keyof WindowEventMap]) {
+
+    function handleBeforeInstall(e: WindowEventMap[keyof WindowEventMap]) {
         const bannerValue = localStorage.getItem("pwaInstallBanner");
         if (bannerValue == "no") return;
         setShowInstallButton(true);
         installPromptData = e;
     }
-    
-    function installPWA(){
-        if(!installPromptData) {
+
+    function installPWA() {
+        if (!installPromptData) {
             alert("すでにインストールされているか, インストールできません.");
             return;
         }
         installPromptData.prompt();
     }
-    
-    function rejectInstall(){
+
+    function rejectInstall() {
         setShowInstallButton(false);
         localStorage.setItem("pwaInstallBanner", "no")
     }
-    
+
     function generateStreakText() {
-        const result = ai.textPrompt(loginStreakPrompt.sysPrompt,loginStreakPrompt.userPrompt + JSON.stringify({streak:loginStreak()[0], diff:loginStreak()[1], lastLogin: loginStreak()[2]}))
-            .then(r=>r?.content||"").then(setLoginCounterText)
+        const result = ai.textPrompt(loginStreakPrompt.sysPrompt, loginStreakPrompt.userPrompt + JSON.stringify({
+            streak: loginStreak()[0],
+            diff: loginStreak()[1],
+            lastLogin: loginStreak()[2]
+        }))
+            .then(r => r?.content || "").then(setLoginCounterText)
     }
+
     function generateGrassCalendarText() {
-        const result = ai.textPrompt(grassCalendarPrompt.sysPrompt,grassCalendarPrompt.userPrompt + JSON.stringify({targetMonth:monthBase().month(), record: JSON.parse(localStorage.getItem("record")||"{}") }))
-            .then(r=>r?.content||"").then(setGrassCalendarText);
+        const result = ai.textPrompt(grassCalendarPrompt.sysPrompt, grassCalendarPrompt.userPrompt + JSON.stringify({
+            targetMonth: monthBase().month(),
+            record: JSON.parse(localStorage.getItem("record") || "{}")
+        }))
+            .then(r => r?.content || "").then(setGrassCalendarText);
         console.log(result);
     }
-    
-    function getTotalMonthTime(){
+
+    function getTotalMonthTime() {
         return sumArray(getRecords(monthBase()))
     }
 
@@ -117,34 +125,42 @@ export default () => {
                 </div>
             </Show>
             <div class={style.carousel}>
-            <SliderProvider>
-                <SliderButton prev class={style.button}>
-                    <BsCaretLeftFill/>
-                </SliderButton>
-            <Slider options={{loop: true}} plugins={[adaptiveHeight, autoplay(10000, {})]}>
-                <div class={clsx(style.loginCounter)}>
-                    <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `}/>
-                    <TypeWriter content={loginCounterText()}/>
-                </div>
-                <Show when={!recordExists(dayjs())}>
-                    <div class={clsx(style.notification)}>
-                        本日の学習記録が未入力です. 入力しませんか？
-                    </div>
-                </Show>
-                <div class={clsx(style.notification)}>
-                    [お知らせ] 01月10日 18:30更新 <span style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
-                    アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
-                </div>
-            </Slider>
-                <SliderButton next class={style.button}>
-                    <BsCaretRightFill/>
-                </SliderButton>
-            </SliderProvider>
+                <SliderProvider>
+                    <SliderButton prev class={style.button}>
+                        <BsCaretLeftFill/>
+                    </SliderButton>
+                    <Slider options={{loop: true}} plugins={[adaptiveHeight, autoplay(10000, {})]}>
+                        <div class={clsx(style.loginCounter)}>
+                            <TypeWriter content={`現在 ${(loginStreak()[0]).toString()} 日連続ログイン中! `}/>
+                            <TypeWriter content={loginCounterText()}/>
+                        </div>
+                        <Show when={!recordExists(dayjs())}>
+                            <div class={clsx(style.notification)}>
+                                本日の学習記録が未入力です. 入力しませんか？
+                                <A href={"record"}>入力する</A>
+                            </div>
+                        </Show>
+                        <div class={clsx(style.notification)}>
+                            [お知らせ] 01月19日 17:10更新 <span
+                            style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
+                            アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
+                        </div>
+                        <div class={clsx(style.notification)}>
+                            Action満足度アンケートにご協力をお願いします. <A href={"questionnaire"}>アンケートはこちら</A>
+                        </div>
+                    </Slider>
+                    <SliderButton next class={style.button}>
+                        <BsCaretRightFill/>
+                    </SliderButton>
+                </SliderProvider>
             </div>
             <div class={style.grassCalendar}>
                 <div class={style.title}>
-                    <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2> <p>総学習時間
-                    : {monthTotal()[0]}時間{monthTotal()[1].toFixed(0)}分</p>
+                <h2>{monthBase().year()} 年 {monthBase().month() + 1} 月</h2>
+                    <p>
+                        総学習時間
+                        : {monthTotal()[0]}時間{monthTotal()[1].toFixed(0)}分
+                    </p>
                     <div class={style.spacer}></div>
                     <IconTextButton class={style.button} icon={<CgChevronLeft/>}
                                     onClick={() => setMonthBase(p => p.subtract(1, "month"))}>
@@ -164,7 +180,7 @@ export default () => {
                 <GrassCalendar {...{monthBase}} />
             </div>
             <div class={style.weekCalendar}>
-            <div class={style.title}>
+                <div class={style.title}>
                     <h2>一週間の概要 - 第 {weekBase().week()} 週</h2>
                     <div class={style.spacer}></div>
                     <IconTextButton class={style.button} icon={<CgChevronLeft/>}

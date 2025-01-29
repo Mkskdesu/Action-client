@@ -68,7 +68,7 @@ export default () => {
                         <BsPauseFill />
                     </R8Button>
                 </Show>
-                <R8Button class={style.button} onClick={() => { setCountUpTimerState("paused"); resetCountUpTimer(); }}>
+                <R8Button class={style.button} onClick={() => { setCountUpTimerState("paused"); resetCountUpTimer();setTimerValue([0,0,0,0]) }}>
                     <BsArrowCounterclockwise />
                 </R8Button>
                 <R8Button class={style.button} onclick={() => {setShowModal(true)}}>

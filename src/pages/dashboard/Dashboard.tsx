@@ -124,6 +124,9 @@ export default () => {
                     <R8Button class={style.x} onClick={rejectInstall}><BsX/></R8Button>
                 </div>
             </Show>
+                <div class={clsx(style.notification)}>
+                    Action満足度アンケートにご協力をお願いします. <A href={"questionnaire"}>アンケートはこちら</A>
+                </div>
             <div class={style.carousel}>
                 <SliderProvider>
                     <SliderButton prev class={style.button}>
@@ -144,9 +147,6 @@ export default () => {
                             [お知らせ] 01月19日 17:10更新 <span
                             style={{"font-family": "Kamaboko"}}>ACTION</span> Ver.{version}
                             アップデート配信! <A href={"patchnote"}>更新内容とパッチノートはこちら</A>
-                        </div>
-                        <div class={clsx(style.notification)}>
-                            Action満足度アンケートにご協力をお願いします. <A href={"questionnaire"}>アンケートはこちら</A>
                         </div>
                     </Slider>
                     <SliderButton next class={style.button}>

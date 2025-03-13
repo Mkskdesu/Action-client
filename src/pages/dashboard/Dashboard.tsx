@@ -125,7 +125,8 @@ export default () => {
                 </div>
             </Show>
                 <div class={clsx(style.notification)}>
-                    Action満足度アンケートにご協力をお願いします. <A href={"questionnaire"}>アンケートはこちら</A>
+                    <b>重要なお知らせ : </b>
+                    ご迷惑をおかけしますが，しばらくの間ACTIONサーバーを停止させていただきます．引き続きACTIONはご利用いただけますが,ログインおよびAI機能が利用できません.
                 </div>
             <div class={style.carousel}>
                 <SliderProvider>

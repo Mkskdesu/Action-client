@@ -30,7 +30,9 @@ export default () => {
     }
 
     onMount(() => {
-        
+        //サーバーを停止している期間中,一時的にログインを自動的にスキップ
+        navigate("/~");
+        return;
         autoLogin()
             .then(() => navigate("/~"))
             .catch(err => {
